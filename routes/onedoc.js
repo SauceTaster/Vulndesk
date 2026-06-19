@@ -87,7 +87,6 @@ module.exports = function (Document, opts) {
             return Document.findOne(q).then((doc) => {
                 if (doc) {
                     throw new Error('Document ' + val + ' exists. Save with a different ID or Update the existing one');
-                    return false;
                 } else {
                     return true;
                 }
@@ -108,7 +107,7 @@ module.exports = function (Document, opts) {
             res.redirect(req.querymen.query[opts.idpath]);
         } else {
             var doc = {};
-            for (a in req.querymen.query) {
+            for (let a in req.querymen.query) {
                 _.set(doc, a, req.querymen.query[a]);
             };
             //console.log(JSON.stringify(req.querymen.query));
@@ -245,7 +244,7 @@ module.exports = function (Document, opts) {
                 }
             }
             var d = new Date();
-            newDoc = {
+            var newDoc = {
                 body: req.body,
                 author: req.user.username,
                 updatedAt: d
@@ -311,7 +310,7 @@ module.exports = function (Document, opts) {
     var getSubDocs = async function (subSchema, doc_id) {
         var q = {}
         q[opts.idpath] = doc_id;
-        parentDoc = await Document.findOne(q).exec();
+        var parentDoc = await Document.findOne(q).exec();
         if (parentDoc) {
             var subq = {
                 parent_id: parentDoc._id

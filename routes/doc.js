@@ -39,7 +39,7 @@ module.exports = function (name, opts) {
     };
     var chartCount = 0;
 
-    for (key in opts.facet) {
+    for (let key in opts.facet) {
         var options = opts.facet[key];
         //toIndex[options.path] = options.sort ? options.sort : 1;
 
@@ -537,7 +537,7 @@ module.exports = function (name, opts) {
                 var f = q[idpath];
                 if (f) {
                     delete q[idpath];
-                    for (k in q) {
+                    for (let k in q) {
                         if (q[k] === "") {
                             delete q[k]
                         }

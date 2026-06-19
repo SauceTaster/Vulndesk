@@ -1,0 +1,9 @@
+# Generated / vendored / minified — not ours to format.
+node_modules/
+standalone/
+coverage/
+package-lock.json
+public/js/*.min.js
+public/js/ace.js
+public/js/jsoneditor.min.js
+default/

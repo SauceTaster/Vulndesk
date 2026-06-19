@@ -13,8 +13,8 @@ module.exports = function (setName, paths) {
     var conf = {};
     if (!paths) 
         paths = ['default','custom'];
-    for (p in paths) {
-        path=paths[p];
+    for (let p in paths) {
+        let path=paths[p];
         if(fs.existsSync(path + '/' + setName + '/conf.js')) {
             var temp = require('../' + path + '/' + setName + '/conf.js');
             conf = extend(true, conf, temp);
@@ -28,7 +28,7 @@ module.exports = function (setName, paths) {
         if(!conf.script && fs.existsSync(path + '/' + setName + '/script.js')) {
             result.script = (result.script ? result.script : '')+fs.readFileSync(path + '/' + setName + '/script.js', {encoding:'utf8'});
         }
-        for (template of ['list', 'edit', 'render']) {
+        for (let template of ['list', 'edit', 'render']) {
             if (fs.existsSync(path + '/' + setName + '/' + template + '.pug')) {
                 result[template] = '../' + path + '/' + setName + '/' + template;
             }

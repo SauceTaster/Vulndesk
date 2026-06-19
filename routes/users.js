@@ -147,7 +147,6 @@ protected.post('/profile/:id(' + conf.usernameRegex + ')?', csrfProtection, [
         }).then((user) => {
             if ((!req.params.id || req.params.id != value) && user) {
                 throw new Error('this username is already in use');
-                return false;
             } else {
                 return true;
             }
@@ -322,7 +321,7 @@ protected.get('/list/css', function (req, res) {
                 res.status(500).send('Error');
             } else {
                 res.setHeader('Content-Type', 'text/css');
-                for(u of users) {
+                for (let u of users) {
                     res.write('input[value="'+u.username+'"] + .lbl:before, #vgListTable span[title="'+u.username+'"]:before, .vguser[title="'+u.username+'"]:before {content: "' + u.emoji + ' ";}\n');
                 }
                 res.end();

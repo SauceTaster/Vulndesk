@@ -38,7 +38,8 @@ User.findOne({username: process.env.VULNDESK_ADMIN_USERNAME}, function(err, admi
             password: hash
         }, { _id: false });
 
-        if(error = newUser.validateSync()) {
+        let error = newUser.validateSync();
+        if (error) {
             console.log("Error: " + error);
             process.exit(1);
         }

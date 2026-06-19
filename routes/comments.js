@@ -109,7 +109,7 @@ module.exports = function (Document, opts) {
             });
         }
     }
-    router = express.Router();
+    var router = express.Router();
     router.post('/comment', csrfProtection, async function (req, res) {
         if (req.body.slug) {
             var r = await updateComment(req.body.id, req.user.username, req.body.text, req.body.slug, new Date());

@@ -171,7 +171,7 @@ app.locals.confOpts = {};
 
 var sections = require('./models/sections.js')();
 
-for(section of sections) {
+for (let section of sections) {
     var s = optSet(section, ['default', 'custom']);
     //var s = conf.sections[section];
     if(s.facet && s.facet.ID) {
@@ -183,14 +183,14 @@ for(section of sections) {
 
 app.use('/home/stats', ensureAuthenticated, async function(req, res, next){
     var sections = [];
-    for(section of conf.sections){
+    for (let section of conf.sections){
         var s = {};
         try {
             var s = await db.collection(section+'s').stats();
         } catch (e){
 
         };
-        if (s === {}) {
+        if (!s || Object.keys(s).length === 0) {
         try {
             var s = await db.collection(section).stats();
         } catch (e){
@@ -223,7 +223,7 @@ app.use(function (req, res, next) {
 });
 
 if(conf.customRoutes) {
-    for(r of conf.customRoutes) {
+    for (let r of conf.customRoutes) {
         app.use(r.path, require(r.route));
     }
 }
@@ -234,7 +234,6 @@ app.get('/', function (req, res, next) {
 
 // Centralized error handler. Keeps thrown errors and next(err) from crashing
 // the process, and avoids leaking stack traces to clients in production.
-// eslint-disable-next-line no-unused-vars
 app.use(function (err, req, res, next) {
     console.error(err && err.stack ? err.stack : err);
     if (res.headersSent) {
