@@ -9,6 +9,7 @@ module.exports = [
   {
     ignores: [
       'node_modules/**',
+      'packages/*/node_modules/**',
       'standalone/**',
       'public/**',
       'default/**',
@@ -28,6 +29,7 @@ module.exports = [
       'models/**/*.js',
       'config/**/*.js',
       'lib/**/*.js',
+      'packages/**/*.js',
     ],
     languageOptions: {
       ecmaVersion: 2022,

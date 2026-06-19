@@ -3,6 +3,9 @@
   "version": "0.6.0",
   "description": "Vulndesk — a CVE and security-advisory authoring tool for PSIRT teams and CNAs. Schema-driven editor for creating, validating, and publishing CVE Records and advisories, with customizable JSON-Schema plugins for tracking anything expressible as a JSON-Schema. Community, MIT-licensed fork of Vulnogram.",
   "main": "app.js",
+  "workspaces": [
+    "packages/*"
+  ],
   "engines": {
     "node": ">=20"
   },

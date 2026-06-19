@@ -26,6 +26,7 @@ if (dotenv.error) {
 
 const conf = require('./config/conf');
 const optSet = require('./models/set');
+const core = require('@vulndesk/core');
 
 if(!process.env.NODE_ENV) {
     process.env.NODE_ENV = "production";
@@ -231,6 +232,18 @@ if(conf.customRoutes) {
         app.use(r.path, require(r.route));
     }
 }
+
+// Server-side CVE5 record validation via @vulndesk/core. The same validator the
+// future MCP server uses, exposed for the editor's "validate" action. Stateless
+// and read-only (no CSRF needed); authentication still required.
+app.post('/api/validate', ensureAuthenticated, function (req, res) {
+    var result = core.validateRecord(req.body);
+    res.json({
+        valid: result.valid,
+        errors: result.errors,
+        messages: core.formatErrors(result.errors)
+    });
+});
 
 app.get('/', function (req, res, next) {
     res.redirect(conf.homepage? conf.homepage : '/home');
