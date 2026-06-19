@@ -217,6 +217,28 @@ app.get('/', function (req, res, next) {
     res.redirect(conf.homepage? conf.homepage : '/home');
 });
 
+// Centralized error handler. Keeps thrown errors and next(err) from crashing
+// the process, and avoids leaking stack traces to clients in production.
+// eslint-disable-next-line no-unused-vars
+app.use(function (err, req, res, next) {
+    console.error(err && err.stack ? err.stack : err);
+    if (res.headersSent) {
+        return next(err);
+    }
+    res.status((err && err.status) || 500);
+    if (req.accepts('html')) {
+        res.render('splash', {
+            title: 'Vulndesk'
+        });
+    } else {
+        var isProd = process.env.NODE_ENV === 'production';
+        res.json({
+            ok: 0,
+            msg: isProd ? 'An unexpected error occurred.' : String((err && err.message) || err)
+        });
+    }
+});
+
 if(conf.httpsOptions) {
     https.createServer(conf.httpsOptions, app).listen(conf.serverPort, conf.serverHost, function () {
         console.log('Server started at https://' + conf.serverHost + ':' + conf.serverPort);

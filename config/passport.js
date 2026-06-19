@@ -9,14 +9,14 @@ module.exports = function (passport) {
     // Local strategy
     passport.use(new LocalStrategy(function (username, password, done) {
         User.findOne({username: username}, function (err, user) {
-            if (err) throw err;
+            if (err) return done(err);
             if (!user) {
                 return done(null, false, {
                     message: 'No user found'
                 });
             }
             pbkdf2.compare(password, user.password, function (err, same) {
-                if (err) throw err;
+                if (err) return done(err);
                 if (same) {
                     return done(null, user);
                 } else {
