@@ -1074,7 +1074,7 @@ function Tabs(tabGroupId, tabOpts, primary) {
             editorLabel.className = "lbl";
             infoMsg.textContent = 'Edited';
             var nid = getDocID();
-            document.title = '• ' + (nid ? nid : 'Vulnogram');
+            document.title = '• ' + (nid ? nid : 'Vulndesk');
             if (document.getElementById("save1")) {
                 save1.className = "fbn sfe save";
             }
@@ -1278,7 +1278,7 @@ function loadJSON(res, id, message, editorOptions) {
             document.title = id;
         } else {
             var nid =  getDocID();
-            document.title = nid ? nid : 'Vulnogram';
+            document.title = nid ? nid : 'Vulndesk';
         }
         if (document.getElementById("save1")) {
             save1.className = "fbn sfe";

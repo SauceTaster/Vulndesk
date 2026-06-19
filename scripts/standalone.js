@@ -1,6 +1,6 @@
 // Copyright (c) 2018 Chandan B N. All rights reserved.
 
-// Generate the standalone static Vulnogram client side only page
+// Generate the standalone static Vulndesk client side only page
 
 // usage:
 // $ node scripts/standalone.js
@@ -43,7 +43,7 @@ if (cd && cd.CNA_private) {
 }
 
 fs.writeFileSync("standalone/index.html", cveEdit({
-    title: 'Vulnogram CVE Editor',
+    title: 'Vulndesk CVE Editor',
     idpath: 'cveMetadata.cveId',
     min: true,
     doc: null,

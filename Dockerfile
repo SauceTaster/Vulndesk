@@ -2,19 +2,19 @@ FROM --platform=linux/amd64 node:12
 
 # Create unprivileged user
 
-RUN groupadd --system vulnogram && useradd --system --create-home --gid vulnogram vulnogram
+RUN groupadd --system vulndesk && useradd --system --create-home --gid vulndesk vulndesk
 
-WORKDIR /home/vulnogram
-COPY ./package*.json /home/vulnogram
-RUN chown vulnogram:vulnogram --recursive /home/vulnogram/
+WORKDIR /home/vulndesk
+COPY ./package*.json /home/vulndesk
+RUN chown vulndesk:vulndesk --recursive /home/vulndesk/
 
-USER vulnogram
+USER vulndesk
 RUN npm install
 
 USER root
-COPY . /home/vulnogram/
+COPY . /home/vulndesk/
 
-RUN chown vulnogram:vulnogram --recursive .
-USER vulnogram
+RUN chown vulndesk:vulndesk --recursive .
+USER vulndesk
 
-CMD ["npm", "start", "--prefix", "/home/vulnogram"]
+CMD ["npm", "start", "--prefix", "/home/vulndesk"]

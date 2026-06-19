@@ -1,5 +1,5 @@
 defaultTabs.sourceTab.getValue = function () {
     var res = JSON.parse(sourceEditor.getSession().getValue());
-    res = cveFixForVulnogram(res);
+    res = cveFixForVulndesk(res);
     return res;
 };

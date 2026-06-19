@@ -11,5 +11,5 @@
 # curl --silent --show-error https://nvd.nist.gov/feeds/json/cve/1.0/nvdcve-1.0-modified.json.gz | gunzip -c | nvdimport.sh -
 for f in "$@"
 do
-    { echo '[{'; egrep -v '(^\s\s"CVE)|^[{}]' "$f";} | mongoimport --quiet -d vulnogram --jsonArray -c nvds --upsert --upsertFields 'cve.CVE_data_meta.ID'
+    { echo '[{'; egrep -v '(^\s\s"CVE)|^[{}]' "$f";} | mongoimport --quiet -d vulndesk --jsonArray -c nvds --upsert --upsertFields 'cve.CVE_data_meta.ID'
 done

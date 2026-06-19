@@ -1,32 +1,37 @@
-# Vulnogram
+# Vulndesk
 
 _Making the world safer one CVE ID at a time, since 2017._
 
-> **ℹ️ OpenVG** is a community-maintained, **MIT-licensed** fork of
+> **ℹ️ Vulndesk** is a community-maintained, **MIT-licensed** fork of
 > [Vulnogram](https://github.com/Vulnogram/Vulnogram), branched from
 > commit [`41702c4c`](https://github.com/Vulnogram/Vulnogram/commit/41702c4c6f7ca218612662aba56c3da1978c3699)
 > — the last commit released under the MIT License before upstream
-> relicensed. See [`FORK.md`](./FORK.md) for full provenance. OpenVG is
+> relicensed. See [`FORK.md`](./FORK.md) for full provenance. Vulndesk is
 > not affiliated with or endorsed by the upstream Vulnogram project.
 
 ## Introduction
 
-Vulnogram is the tool for reserving, managing, and publishing CVEs. Get started at [vulnogram.org](https://vulnogram.org) or deploy a Server or Docker edition for full enterprise features.
+Vulndesk is a tool for reserving, managing, and publishing CVEs. Build the
+browser edition locally (see [Browser mode](#browser-mode-deployment)) or
+deploy the Server / Docker edition for collaborative, database-backed use.
 
-The name Vulnogram is inspired from Greek origin suffix '-gram' which is used for denoting something written or recorded especially in a certain way. Vulnerability related information when recorded in a standard format can help in aggregation, curation, dissemination, analysis and remediation. This enables automation and efficiency in response activities.
-
-Vulnogram project aims to make it easier for vendors and security researchers to accurately record vulnerability information for inclusion in the CVE List.
+Vulnerability information, when recorded in a standard format, can help with
+aggregation, curation, dissemination, analysis, and remediation — enabling
+automation and efficiency in response activities. Vulndesk is a "desk" for that
+work: a schema-driven workbench that makes it easier for vendors, PSIRT teams,
+and CNAs to accurately record vulnerability information for inclusion in the
+CVE List.
 
 <img src="https://raw.githubusercontent.com/Vulnogram/Vulnogram.github.io/master/screenshots/Vulnogram-ScreenShot.jpg" width="50%">
 
 ## Getting started
 
-Vulnogram can be deployed in two modes:
+Vulndesk can be deployed in two modes:
 
 | Browser mode                  | Enterprise Server or Docker mode |
 |------------------------------|------------|
-| Frontend web UI only, as seen on [vulnogram.org](https://vulnogram.org). | A NodeJS web application serves frontend web UI for a backend Mongodb. |
-| It is a Javascript based tool to open, import, edit, preview and save JSON documents which conform to a given [JSON-Schema](https://json-schema.org). | It is a modern scalable issue tracker similar to JIRA or bugtrack but using [JSON-Schemas](https://json-schema.org) as data models and a NoSQL database as a backend. Along with customizable [plugins](https://github.com/Vulnogram/plugins) it can be used for tracking anything that can be expressed with a [JSON-Schema](https://json-schema.org). [plugins](https://github.com/Vulnogram/plugins) are available for tracking security incidents, tickets, contacts, NVD entries and CVE assignments. |
+| Frontend web UI only (build the standalone bundle with `make min`). | A NodeJS web application serves the frontend web UI for a backend Mongodb. |
+| It is a Javascript based tool to open, import, edit, preview and save JSON documents which conform to a given [JSON-Schema](https://json-schema.org). | It is a modern scalable issue tracker similar to JIRA or bugtrack but using [JSON-Schemas](https://json-schema.org) as data models and a NoSQL database as a backend. Along with customizable plugins it can be used for tracking anything that can be expressed with a [JSON-Schema](https://json-schema.org), e.g. security incidents, tickets, contacts, NVD entries and CVE assignments. |
 | Can't save CVE JSON drafts.  | JSON documents are saved to a NoSQL (Mongodb) backend. |
 | No login required.           | Users are authenticated. |
 | No workflow or tracking.     | Allows tracking, querying, searching, version control, audit trail of changes, commenting and dashboard charts and graphs on collections of JSON documents. |
@@ -37,7 +42,7 @@ Vulnogram can be deployed in two modes:
 ### Step 1. Install required Node.js modules
 
 ```console
-$ cd vulnogram
+$ cd vulndesk
 $ npm install
 ... this should install required dependencies, (except process monitors) ...
 ```
@@ -67,7 +72,7 @@ Success New user is now registered and can log in: tester
 
 ### Step 6 (Optional). Configure the .env file
 
-Copy the `example.env` file to `.env` and configure the environment variables to values you prefer. The values in `.env` will automatically be loaded as environment variables when Vulnogram starts. See [dotenv](https://github.com/motdotla/dotenv) for more details.
+Copy the `example.env` file to `.env` and configure the environment variables to values you prefer. The values in `.env` will automatically be loaded as environment variables when Vulndesk starts. See [dotenv](https://github.com/motdotla/dotenv) for more details.
 
 ### Step 7. Start the node application
 
@@ -79,7 +84,7 @@ $ node app.js
 
 ### Step 8. Run the application as a daemon server
 
-Use a process monitor like [pm2](https://www.npmjs.com/package/pm2) (preferred) or [forever] to run vulnogram as a service:
+Use a process monitor like [pm2](https://www.npmjs.com/package/pm2) (preferred) or [forever] to run vulndesk as a service:
 
 #### 8.a Example using [pm2](https://www.npmjs.com/package/pm2)
 
@@ -87,9 +92,9 @@ First install pm2 using instruction [at pm2 documentation](https://www.npmjs.com
 
 ```console
 $ pm2 start app.js
-[PM2] Spawning PM2 daemon with pm2_home=/home/vulnogram/.pm2
+[PM2] Spawning PM2 daemon with pm2_home=/home/vulndesk/.pm2
 [PM2] PM2 Successfully daemonized
-[PM2] Starting /home/vulnogram/app.js in fork_mode (1 instance)
+[PM2] Starting /home/vulndesk/app.js in fork_mode (1 instance)
 [PM2] Done.
 ```
 
@@ -97,13 +102,13 @@ $ pm2 start app.js
 
 ```console
 $ forever start app.js
-> Vulnogram@0.0.6 start /home/vulnogram/
-> forever start --id 'vulnogram' --spinSleepTime 5000 --minUptime 2000 app.js
+> vulndesk@0.6.0 start /home/vulndesk/
+> forever start --id 'vulndesk' --spinSleepTime 5000 --minUptime 2000 app.js
 
 info:    Forever processing file: app.js
 info:    Forever processes running
 data:        uid  command                      script forever pid   id        logfile                      uptime
-data:    [0] v3wE /usr/bin/node app.js 11208   11210 vulnogram /home/vulnogram/.forever/v3wE.log 0:0:0:0.23
+data:    [0] v3wE /usr/bin/node app.js 11208   11210 vulndesk /home/vulndesk/.forever/v3wE.log 0:0:0:0.23
 ```
 
 ### Step 9. Finish
@@ -119,7 +124,7 @@ Web application should be now accessible at one of the following addresses, depe
 
 Note: NodeJS 14.0.0 or later is required to generate files (NodeJS is not needed on a web server; it is only needed to execute the `node` command locally).
 
-Install required NodeJS modules by following [step 1](https://github.com/Vulnogram/Vulnogram#step-1-install-required-nodejs-modules) above.
+Install required NodeJS modules by following [Server mode Step 1](#step-1-install-required-nodejs-modules) above.
 
 ### Step 2 (Optional). Configure defaults
 
@@ -127,7 +132,7 @@ Edit the `config/conf-standalone.js` file to suit your requirements.
 
 ### Step 3 (Optional). Add custom functionality
 
-See [step 4](https://github.com/Vulnogram/Vulnogram#step-4-optional-add-custom-templates-schemas-or-routes) above
+See [Server mode Step 4](#step-4-optional-add-custom-templates-schemas-or-routes) above
 
 ### Step 4. Generate files needed for a front-end only static website (browser mode)
 
@@ -141,25 +146,25 @@ Note: Opening the index.html as a file URL may not work since some browsers (inc
 
 ## Docker deployment
 
-To run Vulnogram in a container alongside MongoDB, run the following command:
+To run Vulndesk in a container alongside MongoDB, run the following command:
 
 ```plaintext
 $ docker compose up
 ```
 
-To modify the configuration options available, make a copy of the example.env file and make relevant modifications. Then launch Vulnogram by using the `ENV_VAR_PATH` environment variable. Replace `example.env` with the path to your file:
+To modify the configuration options available, make a copy of the example.env file and make relevant modifications. Then launch Vulndesk by using the `ENV_VAR_PATH` environment variable. Replace `example.env` with the path to your file:
 
 ```plaintext
 $ ENV_VAR_PATH=example.env docker compose up
 ```
 
-To change the ports that Vulnogram or MongoDB are running on, use the `MONGO_PORT` and `VULNOGRAM_PORT` environment variables. When doing this, make sure to make the appropriate modifications within the environment variables file as well, so that the ports used inside the container match those being passed to docker compose:
+To change the ports that Vulndesk or MongoDB are running on, use the `MONGO_PORT` and `VULNDESK_PORT` environment variables. When doing this, make sure to make the appropriate modifications within the environment variables file as well, so that the ports used inside the container match those being passed to docker compose:
 
 ```console
 $ cat my-env-vars.env | grep PORT
 MONGO_PORT=12345
-VULNOGRAM_PORT=54321
-$ MONGO_PORT=12345 VULNOGRAM_PORT=54321 ENV_VAR_PATH=my-env-vars.env docker compose up
+VULNDESK_PORT=54321
+$ MONGO_PORT=12345 VULNDESK_PORT=54321 ENV_VAR_PATH=my-env-vars.env docker compose up
 ```
 
 ## Dependencies
@@ -181,6 +186,6 @@ This project uses or depends on software from:
 - linkifyjs
 - pptxGenJS
 
-Copyright (c) 2017-2026 Chandan B N.
+Vulndesk is a fork of Vulnogram. Original work Copyright (c) 2017-2026 Chandan B N.
 
 SPDX-License-Identifier: MIT

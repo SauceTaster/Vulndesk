@@ -1,7 +1,7 @@
 {
-  "name": "vulnogram",
+  "name": "vulndesk",
   "version": "0.6.0",
-  "description": "Making the world safer one CVE at a time, since 2017. Tool for creating Security Advisories and CVE ID information. With customizable plugins it can be used for tracking anything that can be expressed with a JSON-Schema. plugins are available for tracking security incidents, tickets, contacts, NVD entries and CVE assignments.",
+  "description": "Vulndesk — a CVE and security-advisory authoring tool for PSIRT teams and CNAs. Schema-driven editor for creating, validating, and publishing CVE Records and advisories, with customizable JSON-Schema plugins for tracking anything expressible as a JSON-Schema. Community, MIT-licensed fork of Vulnogram.",
   "main": "app.js",
   "scripts": {
     "test": "nodemon app",
@@ -9,11 +9,11 @@
     "stop": "forever stop app.js",
     "restart": "forever restart app.js"
   },
-  "author": "Chandan B N.",
+  "author": "SauceTaster",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vulnogram/Vulnogram.git"
+    "url": "git+https://github.com/SauceTaster/Vulndesk.git"
   },
   "dependencies": {
     "busboy": "^1.6.0",
@@ -45,16 +45,19 @@
     "uglify-es": "^3.3.9"
   },
   "bugs": {
-    "url": "https://github.com/Vulnogram/Vulnogram/issues"
+    "url": "https://github.com/SauceTaster/Vulndesk/issues"
   },
-  "homepage": "https://github.com/Vulnogram/Vulnogram#readme",
+  "homepage": "https://github.com/SauceTaster/Vulndesk#readme",
   "directories": {
     "lib": "lib"
   },
   "keywords": [
-    "Vulnogram",
+    "Vulndesk",
     "CVE",
     "CVE-ID",
+    "PSIRT",
+    "CNA",
+    "advisory",
     "reserve",
     "edit",
     "publish",

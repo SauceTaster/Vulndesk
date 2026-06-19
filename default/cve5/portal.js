@@ -588,7 +588,7 @@ async function cveLoad(cveId) {
         var res = await csClient.getCve(cveId);
         if (res.cveMetadata) {
             if (res.containers) {
-                res = cveFixForVulnogram(res);
+                res = cveFixForVulndesk(res);
             } else {
                 console.log('no containers');
             }
@@ -603,7 +603,7 @@ async function cveLoad(cveId) {
                 if (response.ok) {
                     const data = await response.json();
                     if (data && data.cveMetadata) {
-                        loadJSON(cveFixForVulnogram(data), cveId, "Loaded " + cveId + " from public API");
+                        loadJSON(cveFixForVulndesk(data), cveId, "Loaded " + cveId + " from public API");
                         mainTabGroup.change(0);
                         return data;
                     }
@@ -648,7 +648,7 @@ async function cveLoad(cveId) {
                 if (response.ok) {
                     const data = await response.json();
                     if (data && data.cveMetadata) {
-                        loadJSON(cveFixForVulnogram(data), cveId, "Loaded " + cveId + " from public API");
+                        loadJSON(cveFixForVulndesk(data), cveId, "Loaded " + cveId + " from public API");
                         mainTabGroup.change(0);
                         return data;
                     }

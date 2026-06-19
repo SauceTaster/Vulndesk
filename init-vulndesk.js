@@ -10,7 +10,7 @@ mongoose.connect(config.database, {
     keepAlive: false,
 });
 
-User.findOne({username: process.env.VULNOGRAM_ADMIN_USERNAME}, function(err, adminUser) {
+User.findOne({username: process.env.VULNDESK_ADMIN_USERNAME}, function(err, adminUser) {
 
     if (err) {
         console.log("MongoDB Error: " + err);
@@ -18,23 +18,23 @@ User.findOne({username: process.env.VULNOGRAM_ADMIN_USERNAME}, function(err, adm
     }
 
     if (adminUser) {
-        console.log(`Admin user, ${process.env.VULNOGRAM_ADMIN_USERNAME}, already exists. Skipping initialization.`);
+        console.log(`Admin user, ${process.env.VULNDESK_ADMIN_USERNAME}, already exists. Skipping initialization.`);
         mongoose.connection.close();
         process.exit(0);
     }
 
-    pbkdf2.hash(process.env.VULNOGRAM_ADMIN_PASSWORD, function (err, hash) {
+    pbkdf2.hash(process.env.VULNDESK_ADMIN_PASSWORD, function (err, hash) {
 
         if (err) {
             console.error(err);
         }
 
         let newUser = new User({
-            name: process.env.VULNOGRAM_ADMIN_NAME,
-            email: process.env.VULNOGRAM_ADMIN_EMAIL,
-            username: process.env.VULNOGRAM_ADMIN_USERNAME,
+            name: process.env.VULNDESK_ADMIN_NAME,
+            email: process.env.VULNDESK_ADMIN_EMAIL,
+            username: process.env.VULNDESK_ADMIN_USERNAME,
             priv: 0,
-            group: process.env.VULNOGRAM_ADMIN_CNA_EMAIL,
+            group: process.env.VULNDESK_ADMIN_CNA_EMAIL,
             password: hash
         }, { _id: false });
 

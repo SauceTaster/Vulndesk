@@ -11,7 +11,7 @@
 //
 
 const storage = {};
-const keyname = "cve-services.vulnogramkeyStore";
+const keyname = "cve-services.vulndeskkeyStore";
 /* Encryption API using JavaScript native crypto.js and indexeDB for storing private keys */
 const encrypt_storage_version = "1.1.14";
 const cacheName = 'private';

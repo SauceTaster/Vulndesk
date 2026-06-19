@@ -24,5 +24,5 @@ module.exports = {
         'cve5',
 //        'cvss4'
     ],
-    homepage: 'https://vulnogram.org'
+    homepage: 'https://github.com/SauceTaster/Vulndesk'
 };

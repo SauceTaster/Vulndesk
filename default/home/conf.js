@@ -4,7 +4,7 @@ var sections = require('../../models/sections')();
 module.exports = {
 conf: {
     title: 'Dashboard',
-    name: 'Vulnogram',
+    name: 'Vulndesk',
     class: 'vgi-logo',
     order: -10,
     uri: '/home/'

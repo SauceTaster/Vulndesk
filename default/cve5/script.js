@@ -62,7 +62,7 @@ function loadCVE(value) {
                         delete res.containers.cna.x_legacyV4Record;
                     }
                     if (res.containers) {
-                        res = cveFixForVulnogram(res);
+                        res = cveFixForVulndesk(res);
                     }
                     var edOpts = (res.cveMetadata.state == 'REJECTED') ? rejectEditorOption : publicEditorOption;
                     mainTabGroup.change(0);
@@ -554,7 +554,7 @@ async function loadCVEFile(event, elem) {
                 try {
                     res = JSON.parse(evt.target.result);
                     if (res && res.dataVersion && res.dataVersion.match(/^5\.(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))?$/)) {
-                        res = cveFixForVulnogram(res);
+                        res = cveFixForVulndesk(res);
                         //docEditor.setValue(res);
                         var edOpts = (res.cveMetadata.state == 'REJECTED') ? rejectEditorOption : publicEditorOption;
                         mainTabGroup.change(0);
@@ -576,7 +576,7 @@ async function loadCVEFile(event, elem) {
     }
 }
 
-function cveFixForVulnogram(j) {
+function cveFixForVulndesk(j) {
     j = addRichTextCVE(j);
     j = cvssImport(j);
     if (j.containers && j.containers.cna && j.containers.cna.problemTypes == undefined) {
@@ -593,7 +593,7 @@ function cveFixForVulnogram(j) {
 
 let previousVersions = null;
 
-const cpeOverrideDbName = 'vulnogram-settings';
+const cpeOverrideDbName = 'vulndesk-settings';
 const cpeOverrideStoreName = 'cpeNameOverrides';
 const cpeOverrideStoreKey = 'list';
 var cpeNameOverrideCache = null;

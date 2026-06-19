@@ -7,7 +7,7 @@ module.exports = {
     // WARNING: Configure MongoDB authentication and use a strong password
     // WARNING: Ensure MongoDB is not reachable from the network. 
     database: `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME || "admin"}:${process.env.MONGO_INITDB_ROOT_PASSWORD || "admin"}@${process.env.MONGO_HOST || "127.0.0.1"}:${process.env.MONGO_PORT || "27017"}`,
-    //database:'mongodb://vulnogram:StrongLongPass@127.0.0.1:27017/vulnogram',
+    //database:'mongodb://vulndesk:StrongLongPass@127.0.0.1:27017/vulndesk',
 
     // Name of the organization that should be used in page titles etc.,
     //orgName: 'Example Org',
@@ -26,14 +26,14 @@ module.exports = {
    //reviewToken: 'randomtoken',
 
     // port where this tool is running
-    serverHost: process.env.VULNOGRAM_HOST || '127.0.0.1',
-    serverPort: process.env.VULNOGRAM_PORT || 3555,
+    serverHost: process.env.VULNDESK_HOST || '127.0.0.1',
+    serverPort: process.env.VULNDESK_PORT || 3555,
     basedir: '/',
 
 
     //Uncomment this block to enable HTTPs. Configure paths for valid SSL certificates. 
     // Either get them from your favorite Certificate Authority or generate self signed:
-    // Keep these safe and secured and readable only by account running vulnogram process!
+    // Keep these safe and secured and readable only by account running vulndesk process!
     // $ openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out cert.pem
 /*
     httpsOptions: {

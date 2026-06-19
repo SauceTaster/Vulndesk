@@ -125,7 +125,7 @@ function ensureConnected(req, res, next) {
         req.flash('error', 'Database error! Ensure mongod is up and check the settings on the server.')
         res.status(500);
         res.render('splash', {
-            title: 'Vulnogram'
+            title: 'Vulndesk'
         });
     }
 }

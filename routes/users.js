@@ -241,7 +241,7 @@ protected.get('/delete/:id(' + conf.usernameRegex + ')', csrfProtection, functio
 // Login form
 public.get('/login', csrfProtection, function (req, res) {
     res.render('users/login', {
-        title: 'Vulnogram',
+        title: 'Vulndesk',
         csrfToken: req.csrfToken()
     });
 });
