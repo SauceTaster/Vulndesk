@@ -2,6 +2,13 @@
 
 _Making the world safer one CVE ID at a time, since 2017._
 
+> **ℹ️ OpenVG** is a community-maintained, **MIT-licensed** fork of
+> [Vulnogram](https://github.com/Vulnogram/Vulnogram), branched from
+> commit [`41702c4c`](https://github.com/Vulnogram/Vulnogram/commit/41702c4c6f7ca218612662aba56c3da1978c3699)
+> — the last commit released under the MIT License before upstream
+> relicensed. See [`FORK.md`](./FORK.md) for full provenance. OpenVG is
+> not affiliated with or endorsed by the upstream Vulnogram project.
+
 ## Introduction
 
 Vulnogram is the tool for reserving, managing, and publishing CVEs. Get started at [vulnogram.org](https://vulnogram.org) or deploy a Server or Docker edition for full enterprise features.

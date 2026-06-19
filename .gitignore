@@ -11,3 +11,6 @@ ignore
 tmp
 standalone
 config/conf.js
+
+# Local Claude Code tooling
+.claude/
