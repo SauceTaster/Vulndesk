@@ -1,6 +1,6 @@
-# OpenVG — Fork Provenance
+# Vulndesk — Fork Provenance
 
-**OpenVG** is a community-maintained, **MIT-licensed** fork of
+**Vulndesk** is a community-maintained, **MIT-licensed** fork of
 [Vulnogram](https://github.com/Vulnogram/Vulnogram).
 
 ## Why this fork exists
@@ -10,7 +10,7 @@ Vulnogram was released under the MIT License from 2017 onward. On
 (commit `ae0713c`, *"Update the license to prevent phishing and abuse"*),
 replacing `LICENSE.txt` with a new, more restrictive `LICENSE.md`.
 
-OpenVG continues the project from the **last commit that was still under
+Vulndesk continues the project from the **last commit that was still under
 the MIT License**, so the code and all of its history remain free and
 open-source under MIT.
 
@@ -26,7 +26,7 @@ open-source under MIT.
 | License at fork | MIT (`LICENSE.txt`, © 2017-2019 Chandan B. N.) |
 
 The relicensing commit `ae0713c` lands roughly two minutes after the fork
-point on the same day; OpenVG deliberately branches from the commit
+point on the same day; Vulndesk deliberately branches from the commit
 immediately **before** it.
 
 ## What this fork preserves and drops
@@ -46,7 +46,7 @@ immediately **before** it.
 
 This project is derived from Vulnogram, created by Chandan B. N. and the
 Vulnogram contributors. Their copyright notice is preserved in
-[`LICENSE.txt`](./LICENSE.txt). OpenVG is an independent community fork and
+[`LICENSE.txt`](./LICENSE.txt). Vulndesk is an independent community fork and
 is **not affiliated with or endorsed by** the upstream Vulnogram project.
 
 [relicense]: https://github.com/Vulnogram/Vulnogram/commit/ae0713c627dbb4a88031ee428d8d288854425079
