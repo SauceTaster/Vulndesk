@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 node:12
+FROM node:20
 
 # Create unprivileged user
 
@@ -9,7 +9,7 @@ COPY ./package*.json /home/vulndesk
 RUN chown vulndesk:vulndesk --recursive /home/vulndesk/
 
 USER vulndesk
-RUN npm install
+RUN npm ci
 
 USER root
 COPY . /home/vulndesk/
