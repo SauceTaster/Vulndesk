@@ -15,8 +15,8 @@
     "format:check": "prettier --check .",
     "build": "make min",
     "start": "./scripts/start.sh",
-    "stop": "forever stop app.js",
-    "restart": "forever restart app.js"
+    "stop": "pm2 stop vulndesk",
+    "restart": "pm2 restart vulndesk"
   },
   "author": "SauceTaster",
   "license": "MIT",
@@ -31,6 +31,7 @@
     "csurf": "^1.11.0",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
     "express-messages": "^1.0.1",
     "express-rate-limit": "^7.1.0",
     "express-session": "^1.17.3",

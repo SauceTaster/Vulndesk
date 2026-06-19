@@ -1,6 +1,10 @@
 // Copyright (c) 2017 Chandan B N. All rights reserved.
 
 const express = require('express');
+// Patch Express 4 so rejections from async route handlers are forwarded to the
+// centralized error handler below instead of becoming unhandled rejections.
+// (Express 5 does this natively — remove when we migrate.)
+require('express-async-errors');
 const path = require('path');
 const fs = require('fs');
 const mongoose = require('mongoose');
