@@ -3,6 +3,13 @@
 
 # Vulndesk Modernization Roadmap
 
+> **⚠️ Superseded in part.** The end-state is now a ground-up rewrite to a modern
+> TypeScript stack (Hono · React/TanStack · Zod · Drizzle/Postgres · BetterAuth ·
+> Tailwind) — see [`REWRITE.md`](./REWRITE.md). The Phase 3/4/5 "upgrade
+> Express/Mongoose/Pug" items below are moot (those layers are being replaced).
+> Phases 0–2 (safety net, hygiene, headless `@vulndesk/core`) still hold and feed
+> the rewrite, and the findings here remain an accurate audit of the v0.6.0 code.
+
 ## Executive Summary
 
 The realistic end-state is a **single repository with a framework-agnostic `@vulndesk/core` package** — schema, AJV validation, and CVE5 transforms as plain, typed, unit-tested functions — that the Express UI, the standalone browser bundle, and a future MCP server all import, so they can never disagree on what "valid CVE5" means. We get there **incrementally and test-first**: nothing risky moves until a behavioral safety net exists, because today there are zero tests, CI runs against a branch that does not exist (`master` vs. the real `main`), and `package-lock.json` is gitignored so no build is even reproducible. The guiding strategy is to **lock current behavior with golden-file tests before refactoring**, **preserve byte/shape-compatible CVE5 MITRE JSON output and the offline standalone bundle as inviolable contracts**, and sequence work so safety net → quick wins → core extraction → data layer → framework upgrades, never the reverse. Critically, **all CVE validation and business rules live only in the browser today** (serialized to the client via `Function.toString()` in `views/edit.pug:48`), which is the single largest blocker to every roadmap goal — extracting that into a headless core is the keystone that simultaneously fixes the "no server-side validation" security hole and gives the MCP server something real to call. We deliberately defer the Express 4→5 migration and ESM conversion to last, since they are repo-wide and only safe once tests, CI, lint, and the new bundler absorb the churn. MIT licensing, existing saved-document compatibility, and the air-gapped standalone artifact are guardrails, not negotiable trade-offs.
