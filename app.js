@@ -270,12 +270,18 @@ app.use(function (err, req, res, next) {
     }
 });
 
-if(conf.httpsOptions) {
-    https.createServer(conf.httpsOptions, app).listen(conf.serverPort, conf.serverHost, function () {
-        console.log('Server started at https://' + conf.serverHost + ':' + conf.serverPort);
-    });
-} else {
-    app.listen(conf.serverPort, conf.serverHost, function () {
-        console.log('Server started at http://' + conf.serverHost + ':' + conf.serverPort);
-    });
+// Only start a listener when run directly (`node app.js`). When required (e.g.
+// by supertest in the test suite) the app is exported without binding a port.
+if (require.main === module) {
+    if(conf.httpsOptions) {
+        https.createServer(conf.httpsOptions, app).listen(conf.serverPort, conf.serverHost, function () {
+            console.log('Server started at https://' + conf.serverHost + ':' + conf.serverPort);
+        });
+    } else {
+        app.listen(conf.serverPort, conf.serverHost, function () {
+            console.log('Server started at http://' + conf.serverHost + ':' + conf.serverPort);
+        });
+    }
 }
+
+module.exports = app;

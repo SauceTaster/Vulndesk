@@ -851,3 +851,12 @@ function copyToClipboard(text){
     });
     return false;
 }
+
+// In Node (server + tests) also expose the otherwise file-local helpers so they
+// can be unit-tested. The browser ignores this block (no `module`), so the
+// global `textUtil` stays clean there.
+if (typeof module !== 'undefined') {
+    module.exports.cvssjs = cvssjs;
+    module.exports.orderKeys = orderKeys;
+    module.exports.cloneJSON = cloneJSON;
+}
