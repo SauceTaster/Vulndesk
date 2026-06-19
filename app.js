@@ -13,6 +13,7 @@ const session = require('express-session');
 const passport = require('passport');
 const crypto = require('crypto');
 const compress = require('compression');
+const helmet = require('helmet');
 
 const dotenv = require('dotenv').config()
 if (dotenv.error) {
@@ -58,6 +59,13 @@ app.use(limiter);
 
 app.disable('x-powered-by');
 
+// Secure HTTP headers. CSP is disabled for now: the app loads editor assets
+// from a CDN and uses inline scripts/styles, so a strict policy would break it.
+// A real Content-Security-Policy lands with the frontend bundler work (Phase 3).
+app.use(helmet({
+    contentSecurityPolicy: false
+}));
+
 // enable compression
 app.use(compress());
 
@@ -81,13 +89,19 @@ app.use(express.json({limit:'16mb'}));
 // serve files under public freely
 app.use(express.static('public'));
 
-// Express Session middleware
+// Express Session middleware.
+// SESSION_SECRET must be set in production; the random fallback is dev-only and
+// invalidates all sessions on restart (so set it once you deploy). The session
+// store remains the default in-memory store for now — a persistent store is part
+// of the planned auth replacement (BetterAuth), not patched in here.
 app.use(session({
-    secret: crypto.randomBytes(64).toString('hex'),
-    resave: true,
-    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET || crypto.randomBytes(64).toString('hex'),
+    resave: false,
+    saveUninitialized: false,
     cookie: {
-      httpOnly: true
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production' && !!conf.httpsOptions
     }
 }));
 
@@ -134,11 +148,12 @@ app.use(ensureConnected);
 
 //delete return redirect path
 app.use(function (req, res, next) {
-    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-    res.setHeader('X-XSS-Protection', '1; mode=block');
-    res.setHeader("Access-Control-Allow-Origin", "*");// XXX investigate
-    res.setHeader("Access-Control-Request-Headers", "cve-api-cna,cve-api-secret,cve-api-submitter");
-
+    // Security headers (X-Frame-Options, X-Content-Type-Options, etc.) are now
+    // set centrally by helmet above. The previous wildcard
+    // `Access-Control-Allow-Origin: *` (flagged "XXX investigate") was removed:
+    // it exposed the API to every origin and is unnecessary for the same-origin
+    // UI. If cross-origin API access is needed later, add a configurable
+    // allow-list rather than a wildcard.
     if (req.path != '/users/login' && req.session.returnTo) {
         delete req.session.returnTo
     }
