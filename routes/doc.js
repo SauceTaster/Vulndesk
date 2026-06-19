@@ -1,6 +1,5 @@
 const express = require('express');
 const fs = require('fs');
-const ObjectID = require('mongodb').ObjectID;
 const docModel = require('../models/doc');
 const conf = require('../config/conf');
 const querymw = require('../lib/querymw');

@@ -44,13 +44,15 @@
     "helmet": "^8.2.0",
     "json-patch-extended": "^0.1.2",
     "linkifyjs": "^4.1.1",
+    "lodash": "^4.18.1",
     "mongodb": "^3.7.3",
     "mongoose": "^6.12.2",
     "object-path": "^0.11.7",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "pug": "^3.0.2",
-    "querymen": "^2.1.4"
+    "querymen": "^2.1.4",
+    "sanitize-html": "^2.17.5"
   },
   "bugs": {
     "url": "https://github.com/SauceTaster/Vulndesk/issues"

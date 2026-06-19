@@ -30,6 +30,8 @@ module.exports = [
       'config/**/*.js',
       'lib/**/*.js',
       'packages/**/*.js',
+      'playwright.config.js',
+      'e2e/**/*.js',
     ],
     languageOptions: {
       ecmaVersion: 2022,

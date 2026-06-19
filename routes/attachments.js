@@ -144,7 +144,23 @@ module.exports = function (Document, opts) {
             res.setHeader("Content-Security-Policy", "default-src 'none'; connect-src 'none'");
             return next();
         },
-        express.static(path.join(opts.conf.files))
+        function (req, res) {
+            // Serve a single file from THIS document's directory only; never let
+            // the URL-supplied name escape it (path traversal). Previously this
+            // handed the raw path to express.static rooted at the whole files dir.
+            var name = path.basename(req.params.filename);
+            if (name !== req.params.filename || sanitizeFile(name) !== name) {
+                return res.status(400).json({ ok: 0, msg: 'Invalid file name' });
+            }
+            res.sendFile(name, {
+                root: path.join(opts.conf.files, req.params.id, 'file'),
+                dotfiles: 'deny'
+            }, function (err) {
+                if (err && !res.headersSent) {
+                    res.status(404).json({ ok: 0, msg: 'File not found' });
+                }
+            });
+        }
     );
 
     // delete file
@@ -153,6 +169,12 @@ module.exports = function (Document, opts) {
         fq[opts.idpath] = req.params.id;
         try {
             var ret = await Document.update(fq, { $pull: { files: { name: req.params.filename } } });
+            // Remove the bytes from disk too — the $pull only drops the metadata,
+            // leaving an orphaned, still-downloadable file otherwise.
+            var name = path.basename(req.params.filename);
+            if (name === req.params.filename && sanitizeFile(name) === name) {
+                fs.unlink(path.join(opts.conf.files, req.params.id, 'file', name), function () {});
+            }
             res.json({ ok: ret.ok, n: ret.n });
         } catch (e) {
             res.json(e);
@@ -170,6 +192,9 @@ module.exports = function (Document, opts) {
             var fq = {};
             fq[opts.idpath] = req.params.id;
             var doc = await Document.findOne(fq, { files: 1 });
+            if (!doc) {
+                return res.status(404).json({ ok: 0, msg: 'Document not found!' });
+            }
             res.json(doc.files);
         });
 

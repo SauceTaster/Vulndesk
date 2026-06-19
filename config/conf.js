@@ -25,8 +25,8 @@ module.exports = {
    //reviewToken: 'randomtoken',
 
     // port where this tool is running
-    serverHost: process.env.VULNOGRAM_HOST || '127.0.0.1',
-    serverPort: process.env.VULNOGRAM_PORT || 3555,
+    serverHost: process.env.VULNDESK_HOST || '127.0.0.1',
+    serverPort: process.env.VULNDESK_PORT || 3555,
     basedir: '/',
 
     //Uncomment this block to enable HTTPs. Configure paths for valid SSL certificates.

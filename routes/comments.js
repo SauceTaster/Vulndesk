@@ -2,6 +2,22 @@ const express = require('express');
 const csurf = require('csurf');
 var csrfProtection = csurf();
 const crypto = require('crypto');
+const sanitizeHtml = require('sanitize-html');
+
+// Comment bodies are rich text rendered as HTML to every viewer. Sanitize on the
+// server before persisting so the (bypassable, client-only) editor sanitizer is
+// never the sole gate against stored XSS.
+function cleanComment(text) {
+    return sanitizeHtml(text == null ? '' : String(text), {
+        allowedTags: [
+            'p', 'br', 'div', 'span', 'b', 'i', 'em', 'strong', 'u', 's', 'strike',
+            'code', 'pre', 'blockquote', 'ul', 'ol', 'li', 'a',
+            'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'sub', 'sup',
+        ],
+        allowedAttributes: { a: ['href', 'title', 'target', 'rel'], span: ['class'] },
+        allowedSchemes: ['http', 'https', 'mailto'],
+    });
+}
 
 var random_slug = function () {
     return crypto.randomBytes(13).toString('base64').replace(/[\+\/\=]/g, '-');
@@ -111,11 +127,12 @@ module.exports = function (Document, opts) {
     }
     var router = express.Router();
     router.post('/comment', csrfProtection, async function (req, res) {
+        var text = cleanComment(req.body.text);
         if (req.body.slug) {
-            var r = await updateComment(req.body.id, req.user.username, req.body.text, req.body.slug, new Date());
+            var r = await updateComment(req.body.id, req.user.username, text, req.body.slug, new Date());
             res.json(r);
         } else {
-            addComment(req.body.id, req.user.username, req.body.text).then(r => {
+            addComment(req.body.id, req.user.username, text).then(r => {
                 res.json(r);
             })
         }

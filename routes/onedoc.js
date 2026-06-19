@@ -37,7 +37,9 @@ module.exports = function (Document, opts) {
             var ucomments = undefined;
             if (!doc) {
                 if(req.params.id != 'new') {
-                    req.flash('error', 'ID not found: ' + req.params.id);
+                    // Escape: this flash is rendered unescaped via !=messages(), and
+                    // req.params.id is not enforced against the id pattern here.
+                    req.flash('error', 'ID not found: ' + validator.escape(String(req.params.id)));
                 }
             } else {
                 ucomments = doc.comments;
