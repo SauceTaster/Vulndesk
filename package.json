@@ -25,8 +25,6 @@
     "busboy": "^1.6.0",
     "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
-    "csso": "^5.0.5",
-    "csso-cli": "^4.0.2",
     "csurf": "^1.11.0",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
@@ -36,19 +34,14 @@
     "express-validator": "^6.14.2",
     "extend": "^3.0.2",
     "json-patch-extended": "^0.1.2",
-    "light-server": "^2.9.1",
     "linkifyjs": "^4.1.1",
     "mongodb": "^3.7.3",
     "mongoose": "^6.12.2",
-    "node-fetch": "^2.6.7",
-    "nodemon": "^3.0.1",
     "object-path": "^0.11.7",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "pm2": "^5.3.1",
     "pug": "^3.0.2",
-    "querymen": "^2.1.4",
-    "uglify-es": "^3.3.9"
+    "querymen": "^2.1.4"
   },
   "bugs": {
     "url": "https://github.com/SauceTaster/Vulndesk/issues"
@@ -72,6 +65,11 @@
     "editor"
   ],
   "devDependencies": {
+    "csso": "^5.0.5",
+    "csso-cli": "^4.0.2",
+    "nodemon": "^3.0.1",
+    "pm2": "^5.3.1",
+    "uglify-es": "^3.3.9",
     "vitest": "^4.1.9"
   }
 }
