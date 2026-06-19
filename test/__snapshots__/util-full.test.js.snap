@@ -1,0 +1,40 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`getAffectedProductString — operators, platform, edges > groups multiple vendors and products — snapshot 1`] = `
+"This issue affects:
+Acme Widget
+Widget versions earlier than 1.0.
+Acme Gadget
+2.0.
+
+This issue does not affect:
+Globex Thing
+3.0."
+`;
+
+exports[`getAffectedProductString — operators, platform, edges > renders every version_affected operator (and the !/? prefixed variants) — snapshot 1`] = `
+"This issue affects:
+Acme Widget
+1.0;
+Widget versions earlier than 2.0;
+Widget versions later than 3.0;
+Widget 4.0 and earlier versions;
+Widget 5.0 and later versions.
+
+This issue does not affect:
+Acme Widget
+6.0;
+Widget versions earlier than 8.0;
+Widget 11.0 and earlier versions;
+Widget 13.0 and later versions.
+
+It is not known whether this issue affects:
+Acme Widget
+7.0;
+Widget versions earlier than 9.0;
+Widget versions later than 10.0;
+Widget 12.0 and earlier versions;
+Widget 14.0 and later versions."
+`;
+
+exports[`jsonView > snapshot of a representative object structure 1`] = `"<div><div><b>id</b>: CVE-1</div><div><b>meta</b>: <div><div><b>lang</b>: eng</div></div></div></div>"`;

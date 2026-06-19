@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`lib/pbkdf2 — fixed golden-master hash (deterministic verification) > matches the recorded golden snapshot string 1`] = `"AAAAAQAAABAAAYj3FWp5Wl2RIJnQFEoF0/ANYiI1a+O+5D/562c+O8CYel54zauLfvabdXD9mSHs/Y0q"`;

@@ -1,0 +1,330 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`cveFixForVulndesk > adds rich text, runs cvssImport, and defaults problemTypes/impacts/metrics to [] 1`] = `
+{
+  "containers": {
+    "cna": {
+      "descriptions": [
+        {
+          "lang": "en",
+          "supportingMedia": [
+            {
+              "base64": false,
+              "type": "text/html",
+              "value": "R:Hello",
+            },
+          ],
+          "value": "Hello",
+        },
+      ],
+      "impacts": [],
+      "metrics": [],
+      "problemTypes": [],
+    },
+  },
+}
+`;
+
+exports[`cveFixForVulndesk > upgrades a v3.0 metric while applying the full fix via snapshot 1`] = `
+{
+  "containers": {
+    "cna": {
+      "descriptions": [
+        {
+          "lang": "en",
+          "supportingMedia": [
+            {
+              "base64": false,
+              "type": "text/html",
+              "value": "R:A flaw",
+            },
+          ],
+          "value": "A flaw",
+        },
+      ],
+      "impacts": [],
+      "metrics": [
+        {
+          "cvssV3_1": {
+            "attackComplexity": "LOW",
+            "attackVector": "NETWORK",
+            "availabilityImpact": "HIGH",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "HIGH",
+            "privilegesRequired": "NONE",
+            "scope": "UNCHANGED",
+            "userInteraction": "NONE",
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+            "version": "3.1",
+          },
+          "format": "CVSS",
+          "scenarios": [
+            {
+              "lang": "en",
+              "value": "GENERAL",
+            },
+          ],
+        },
+      ],
+      "problemTypes": [],
+    },
+  },
+}
+`;
+
+exports[`cvssImport > processes both cna and adp metrics and fills a v2.0 vector 1`] = `
+{
+  "containers": {
+    "adp": [
+      {
+        "metrics": [
+          {
+            "cvssV2_0": {
+              "accessComplexity": "LOW",
+              "accessVector": "NETWORK",
+              "authentication": "NONE",
+              "availabilityImpact": "COMPLETE",
+              "confidentialityImpact": "COMPLETE",
+              "integrityImpact": "COMPLETE",
+              "vectorString": "AV:N/AC:L/Au:N/C:C/I:C/A:C",
+              "version": "2.0",
+            },
+            "format": "CVSS",
+            "scenarios": [
+              {
+                "lang": "en",
+                "value": "GENERAL",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    "cna": {
+      "metrics": [
+        {
+          "cvssV3_1": {
+            "attackComplexity": "LOW",
+            "attackVector": "NETWORK",
+            "availabilityImpact": "HIGH",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "HIGH",
+            "privilegesRequired": "NONE",
+            "scope": "CHANGED",
+            "userInteraction": "NONE",
+            "vectorString": "CVSS:3.1/AV:N",
+            "version": "3.1",
+          },
+          "format": "CVSS",
+          "scenarios": [
+            {
+              "lang": "en",
+              "value": "GENERAL",
+            },
+          ],
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`cvssImport > upgrades cvssV3_0 to cvssV3_1, rewrites vector prefix, adds format + GENERAL scenario, and fills metrics 1`] = `
+{
+  "containers": {
+    "cna": {
+      "metrics": [
+        {
+          "cvssV3_1": {
+            "attackComplexity": "LOW",
+            "attackVector": "NETWORK",
+            "availabilityImpact": "HIGH",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "HIGH",
+            "privilegesRequired": "NONE",
+            "scope": "UNCHANGED",
+            "userInteraction": "NONE",
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+            "version": "3.1",
+          },
+          "format": "CVSS",
+          "scenarios": [
+            {
+              "lang": "en",
+              "value": "GENERAL",
+            },
+          ],
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`fillCvssMetrics > fills a full v4.0 record (base from vector, threat + supplemental -> NOT_DEFINED) via snapshot 1`] = `
+{
+  "attackComplexity": "LOW",
+  "attackRequirements": "NONE",
+  "attackVector": "NETWORK",
+  "automatable": "NOT_DEFINED",
+  "exploitMaturity": "NOT_DEFINED",
+  "privilegesRequired": "NONE",
+  "providerUrgency": "NOT_DEFINED",
+  "recovery": "NOT_DEFINED",
+  "safety": "NOT_DEFINED",
+  "subAvailabilityImpact": "NONE",
+  "subConfidentialityImpact": "NONE",
+  "subIntegrityImpact": "NONE",
+  "userInteraction": "NONE",
+  "valueDensity": "NOT_DEFINED",
+  "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N",
+  "version": "4.0",
+  "vulnAvailabilityImpact": "HIGH",
+  "vulnConfidentialityImpact": "HIGH",
+  "vulnIntegrityImpact": "HIGH",
+  "vulnerabilityResponseEffort": "NOT_DEFINED",
+}
+`;
+
+exports[`generateCpeApplicability / generateCpeApplicabilityNode > node emits lessThanOrEqual, plain-version, and platform-token matches via snapshot 1`] = `
+{
+  "cpeMatch": [
+    {
+      "criteria": "cpe:2.3:a:v:p:*:*:linux:*:*:*:*:*",
+      "versionEndIncluding": "1.5",
+      "versionStartIncluding": "1.0",
+      "vulnerable": false,
+    },
+    {
+      "criteria": "cpe:2.3:a:v:p:2.0:*:linux:*:*:*:*:*",
+      "vulnerable": true,
+    },
+  ],
+  "negate": false,
+  "operator": "OR",
+}
+`;
+
+exports[`htmltoText > locks the full transform of a richer fragment via snapshot 1`] = `
+"First paragraph with  a link https://example.com/page .
+
+  *  item one
+  *  item two
+
+
+trailing"
+`;
+
+exports[`versionStatusTable5 > builds a simple "from X before Y" affected range 1`] = `
+{
+  "groups": {
+    "V P,,,[object Object],unknown": [
+      "V P",
+      "",
+      "",
+      {},
+      "unknown",
+    ],
+  },
+  "show": {
+    "affected": true,
+    "modules": false,
+    "platforms": false,
+    "unaffected": false,
+    "unknown": false,
+  },
+  "vals": {
+    "V P,,,[object Object],unknown": [
+      {
+        "affected": [
+          "from 1.0 before 2.0",
+        ],
+        "unaffected": [],
+        "unknown": [],
+      },
+    ],
+  },
+}
+`;
+
+exports[`versionStatusTable5 > captures packageName fallback and "others" (collectionURL/repo/programFiles/programRoutines) 1`] = `
+{
+  "groups": {
+    "pkg,,,[object Object],": [
+      "pkg",
+      "",
+      "",
+      {
+        "collectionURL": "http://c",
+        "programFiles": [
+          "f",
+        ],
+        "programRoutines": [
+          {
+            "name": "x",
+          },
+        ],
+        "repo": "http://r",
+      },
+      undefined,
+    ],
+  },
+  "show": {
+    "affected": false,
+    "modules": false,
+    "platforms": false,
+    "unaffected": false,
+    "unknown": true,
+  },
+  "vals": {
+    "pkg,,,[object Object],": [
+      {
+        "affected": [],
+        "unaffected": [],
+        "unknown": [
+          "3.0",
+        ],
+      },
+    ],
+  },
+}
+`;
+
+exports[`versionStatusTable5 > handles platforms, modules, changes, and lessThanOrEqual via snapshot 1`] = `
+{
+  "groups": {
+    "Acme Thing,Linux, Win,m1,[object Object],unaffected": [
+      "Acme Thing",
+      "Linux, Win",
+      "m1",
+      {},
+      "unaffected",
+    ],
+  },
+  "show": {
+    "affected": true,
+    "modules": true,
+    "platforms": true,
+    "unaffected": true,
+    "unknown": false,
+  },
+  "vals": {
+    "Acme Thing,Linux, Win,m1,[object Object],unaffected": [
+      {
+        "affected": [
+          "from 1.0 through 1.9 (unaffected from 1.5)",
+        ],
+        "unaffected": [],
+        "unknown": [],
+      },
+      {
+        "affected": [],
+        "unaffected": [
+          "2.0",
+        ],
+        "unknown": [],
+      },
+    ],
+  },
+}
+`;

@@ -1,0 +1,90 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`conf-default.js :: static branding & literal fields > ace/jsoneditor/ajv CDN URLs and SRI hashes are locked 1`] = `
+{
+  "ace": "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js",
+  "aceHash": "sha512-OMjy8oWtPbx9rJmoprdaQdS2rRovgTetHjiBf7RL7LvRSouoMLks5aIcgqHb6vGEAduuPdBTDCoztxLR+nv45g==",
+  "ajv": "https://cdnjs.cloudflare.com/ajax/libs/ajv/8.12.0/ajv7.min.js",
+  "ajvHash": "sha512-U2SW9Ihh3GF6F8gP8QgLS+I244xnM5pFCh3cigpw7bAzUDnKDlxdlFL4kjyXTle8SJl/tJ0gdnwd44Eb3hLG/Q==",
+  "jsoneditor": "https://cdnjs.cloudflare.com/ajax/libs/json-editor/2.8.0/jsoneditor.min.js",
+  "jsoneditorHash": "sha512-8y8kuGFzNGSgACEMNnXJGhOQaLAd4P9MdCXnJ37QjGTBPRrD5FCEVEKj/93xNihQehkO3yVKnOECFWGxxBsveQ==",
+}
+`;
+
+exports[`conf-default.js :: static branding & literal fields > exported key set is exactly the recorded list (snapshot) 1`] = `
+[
+  "database",
+  "groupName",
+  "classification",
+  "copyright",
+  "serverHost",
+  "serverPort",
+  "basedir",
+  "mitreURL",
+  "defectURL",
+  "publicDefectURL",
+  "ace",
+  "aceHash",
+  "jsoneditor",
+  "jsoneditorHash",
+  "ajv",
+  "ajvHash",
+  "usernameRegex",
+  "sections",
+  "homepage",
+]
+`;
+
+exports[`conf-default.js :: static branding & literal fields > full conf-default object (defaults, with env unset) snapshot 1`] = `
+{
+  "ace": "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js",
+  "aceHash": "sha512-OMjy8oWtPbx9rJmoprdaQdS2rRovgTetHjiBf7RL7LvRSouoMLks5aIcgqHb6vGEAduuPdBTDCoztxLR+nv45g==",
+  "ajv": "https://cdnjs.cloudflare.com/ajax/libs/ajv/8.12.0/ajv7.min.js",
+  "ajvHash": "sha512-U2SW9Ihh3GF6F8gP8QgLS+I244xnM5pFCh3cigpw7bAzUDnKDlxdlFL4kjyXTle8SJl/tJ0gdnwd44Eb3hLG/Q==",
+  "basedir": "/",
+  "classification": "Confidential INTERNAL USE ONLY",
+  "copyright": "© Example Org. Made with vulndesk 0.6.0",
+  "database": "mongodb://admin:admin@127.0.0.1:27017",
+  "defectURL": "https://example.net/internal/bugs/",
+  "groupName": "Security Incident Response Team",
+  "homepage": "/home",
+  "jsoneditor": "https://cdnjs.cloudflare.com/ajax/libs/json-editor/2.8.0/jsoneditor.min.js",
+  "jsoneditorHash": "sha512-8y8kuGFzNGSgACEMNnXJGhOQaLAd4P9MdCXnJ37QjGTBPRrD5FCEVEKj/93xNihQehkO3yVKnOECFWGxxBsveQ==",
+  "mitreURL": "https://www.cve.org/CVERecord?id=",
+  "publicDefectURL": "https://example.net/bugs/",
+  "sections": [
+    "cve",
+    "cve5",
+    "nvd",
+  ],
+  "serverHost": "127.0.0.1",
+  "serverPort": 3555,
+  "usernameRegex": "[a-zA-Z0-9]{3,}",
+}
+`;
+
+exports[`conf-standalone.js :: exported shape > ace + jsoneditor URLs and SRI hashes are locked (jsoneditor differs from conf-default) 1`] = `
+{
+  "ace": "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js",
+  "aceHash": "sha512-OMjy8oWtPbx9rJmoprdaQdS2rRovgTetHjiBf7RL7LvRSouoMLks5aIcgqHb6vGEAduuPdBTDCoztxLR+nv45g==",
+  "jsoneditor": "https://cdnjs.cloudflare.com/ajax/libs/json-editor/2.15.2/jsoneditor.js",
+  "jsoneditorHash": "sha512-Odi69X/i28s3GR3ZQyE+g4ieU30AMOovH50wJbehVMWxVChGa1KCUzyvOXkHfYr/2AQizFRNWI1R6oifT16ouQ==",
+}
+`;
+
+exports[`conf-standalone.js :: exported shape > full conf-standalone object snapshot (year normalized) 1`] = `
+{
+  "ace": "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js",
+  "aceHash": "sha512-OMjy8oWtPbx9rJmoprdaQdS2rRovgTetHjiBf7RL7LvRSouoMLks5aIcgqHb6vGEAduuPdBTDCoztxLR+nv45g==",
+  "basedir": "./",
+  "copyright": "Copyright © Chandan B.N, 2017-<YEAR>. Usage of CVE IDs is subject to CVE terms of use. This site does not track you and is safe for working with confidential vulnerability information. Made with vulndesk 0.6.0",
+  "defectURL": "https://example.com/bugtracker=",
+  "homepage": "https://github.com/SauceTaster/Vulndesk",
+  "jsoneditor": "https://cdnjs.cloudflare.com/ajax/libs/json-editor/2.15.2/jsoneditor.js",
+  "jsoneditorHash": "sha512-Odi69X/i28s3GR3ZQyE+g4ieU30AMOovH50wJbehVMWxVChGa1KCUzyvOXkHfYr/2AQizFRNWI1R6oifT16ouQ==",
+  "mitreURL": "https://www.cve.org/cverecord?id=",
+  "sections": [
+    "cve5",
+  ],
+}
+`;

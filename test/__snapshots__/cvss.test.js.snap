@@ -1,0 +1,218 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`cvssjs — data tables (lock the weight/map constants) > Weight table for v3 (snapshot) 1`] = `
+{
+  "attackComplexity": {
+    "HIGH": 0.44,
+    "LOW": 0.77,
+  },
+  "attackVector": {
+    "ADJACENT_NETWORK": 0.62,
+    "LOCAL": 0.55,
+    "NETWORK": 0.85,
+    "PHYSICAL": 0.2,
+  },
+  "availabilityImpact": {
+    "HIGH": 0.56,
+    "LOW": 0.22,
+    "NONE": 0,
+  },
+  "confidentialityImpact": {
+    "HIGH": 0.56,
+    "LOW": 0.22,
+    "NONE": 0,
+  },
+  "integrityImpact": {
+    "HIGH": 0.56,
+    "LOW": 0.22,
+    "NONE": 0,
+  },
+  "privilegesRequired": {
+    "CHANGED": {
+      "HIGH": 0.5,
+      "LOW": 0.68,
+      "NONE": 0.85,
+    },
+    "UNCHANGED": {
+      "HIGH": 0.27,
+      "LOW": 0.62,
+      "NONE": 0.85,
+    },
+  },
+  "scope": {
+    "CHANGED": 7.52,
+    "UNCHANGED": 6.42,
+  },
+  "userInteraction": {
+    "NONE": 0.85,
+    "REQUIRED": 0.62,
+  },
+}
+`;
+
+exports[`cvssjs — data tables (lock the weight/map constants) > metricMap4 maps abbreviations back to long metric names (snapshot) 1`] = `
+{
+  "AC": "attackComplexity",
+  "AT": "attackRequirements",
+  "AU": "Automatable",
+  "AV": "attackVector",
+  "E": "exploitMaturity",
+  "PR": "privilegesRequired",
+  "R": "Recovery",
+  "RE": "vulnerabilityResponseEffort",
+  "S": "Safety",
+  "SA": "subAvailabilityImpact",
+  "SC": "subConfidentialityImpact",
+  "SI": "subIntegrityImpact",
+  "U": "providerUrgency",
+  "UI": "userInteraction",
+  "V": "valueDensity",
+  "VA": "vulnAvailabilityImpact",
+  "VC": "vulnConfidentialityImpact",
+  "VI": "vulnIntegrityImpact",
+}
+`;
+
+exports[`cvssjs — data tables (lock the weight/map constants) > valueMap and CVSSseveritys (snapshot) 1`] = `
+{
+  "AMBER": "Amber",
+  "CLEAR": "Clear",
+  "GREEN": "Green",
+  "RED": "Red",
+}
+`;
+
+exports[`cvssjs — data tables (lock the weight/map constants) > valueMap and CVSSseveritys (snapshot) 2`] = `
+[
+  {
+    "bottom": 0,
+    "name": "NONE",
+    "top": 0,
+  },
+  {
+    "bottom": 0.1,
+    "name": "LOW",
+    "top": 3.9,
+  },
+  {
+    "bottom": 4,
+    "name": "MEDIUM",
+    "top": 6.9,
+  },
+  {
+    "bottom": 7,
+    "name": "HIGH",
+    "top": 8.9,
+  },
+  {
+    "bottom": 9,
+    "name": "CRITICAL",
+    "top": 10,
+  },
+]
+`;
+
+exports[`cvssjs — data tables (lock the weight/map constants) > vectorMap3 / vectorMap2 (snapshot) 1`] = `
+{
+  "attackComplexity": "AC",
+  "attackVector": "AV",
+  "availabilityImpact": "A",
+  "confidentialityImpact": "C",
+  "integrityImpact": "I",
+  "privilegesRequired": "PR",
+  "scope": "S",
+  "userInteraction": "UI",
+}
+`;
+
+exports[`cvssjs — data tables (lock the weight/map constants) > vectorMap3 / vectorMap2 (snapshot) 2`] = `
+{
+  "accessComplexity": "AC",
+  "accessVector": "AV",
+  "authentication": "Au",
+  "availabilityImpact": "A",
+  "confidentialityImpact": "C",
+  "integrityImpact": "I",
+}
+`;
+
+exports[`cvssjs — data tables (lock the weight/map constants) > vectorMap4 maps long metric names to abbreviations (snapshot) 1`] = `
+{
+  "Automatable": "AU",
+  "Recovery": "R",
+  "Safety": "S",
+  "attackComplexity": "AC",
+  "attackRequirements": "AT",
+  "attackVector": "AV",
+  "exploitMaturity": "E",
+  "privilegesRequired": "PR",
+  "providerUrgency": "U",
+  "subAvailabilityImpact": "SA",
+  "subConfidentialityImpact": "SC",
+  "subIntegrityImpact": "SI",
+  "userInteraction": "UI",
+  "valueDensity": "V",
+  "vulnAvailabilityImpact": "VA",
+  "vulnConfidentialityImpact": "VC",
+  "vulnIntegrityImpact": "VI",
+  "vulnerabilityResponseEffort": "RE",
+}
+`;
+
+exports[`cvssjs — data tables (lock the weight/map constants) > w2 table for v2 (snapshot) 1`] = `
+{
+  "accessComplexity": {
+    "HIGH": 0.35,
+    "LOW": 0.71,
+    "MEDIUM": 0.61,
+  },
+  "accessVector": {
+    "ADJACENT_NETWORK": 0.646,
+    "LOCAL": 0.395,
+    "NETWORK": 1,
+  },
+  "authentication": {
+    "MULTIPLE": 0.45,
+    "NONE": 0.704,
+    "SINGLE": 0.56,
+  },
+  "availabilityImpact": {
+    "COMPLETE": 0.66,
+    "NONE": 0,
+    "PARTIAL": 0.275,
+  },
+  "confidentialityImpact": {
+    "COMPLETE": 0.66,
+    "NONE": 0,
+    "PARTIAL": 0.275,
+  },
+  "integrityImpact": {
+    "COMPLETE": 0.66,
+    "NONE": 0,
+    "PARTIAL": 0.275,
+  },
+}
+`;
+
+exports[`cvssjs — module / export shape > is a plain object exposing exactly the expected own keys (snapshot) 1`] = `
+[
+  "vectorMap4",
+  "metricMap4",
+  "vectorMap3",
+  "vectorMap2",
+  "Weight",
+  "valueMap",
+  "cvss",
+  "m",
+  "vector4",
+  "vector3",
+  "vector2",
+  "CVSSseveritys",
+  "severityLevel",
+  "severity",
+  "roundUp1",
+  "calculate3",
+  "w2",
+  "calculate2",
+]
+`;

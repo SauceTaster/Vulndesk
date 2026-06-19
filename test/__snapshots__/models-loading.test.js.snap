@@ -1,0 +1,439 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`optSet — cross-section invariants > snapshot of the resolved path/asset facts for every section 1`] = `
+{
+  "cve5": {
+    "edit": "../default/cve5/edit",
+    "hasIcons": true,
+    "hasRouter": true,
+    "hasSchema": true,
+    "hasScript": true,
+    "hasStyle": true,
+    "hasValidators": true,
+    "list": "list",
+    "render": "../default/cve5/render",
+    "static": "default/cve5/static",
+  },
+  "cvss4": {
+    "edit": "../default/cvss4/edit",
+    "hasIcons": false,
+    "hasRouter": true,
+    "hasSchema": true,
+    "hasScript": false,
+    "hasStyle": true,
+    "hasValidators": true,
+    "list": "list",
+    "render": "render",
+    "static": "default/cvss4/static",
+  },
+  "home": {
+    "edit": "../default/home/edit",
+    "hasIcons": false,
+    "hasRouter": false,
+    "hasSchema": true,
+    "hasScript": true,
+    "hasStyle": true,
+    "hasValidators": false,
+    "list": "../default/home/list",
+    "render": "../default/home/render",
+    "static": "default/home/static",
+  },
+  "nvd": {
+    "edit": "edit",
+    "hasIcons": false,
+    "hasRouter": false,
+    "hasSchema": false,
+    "hasScript": false,
+    "hasStyle": true,
+    "hasValidators": false,
+    "list": "list",
+    "render": "render",
+    "static": null,
+  },
+}
+`;
+
+exports[`optSet("cve5", ["default"]) — full plugin shape > facet structure > snapshot of the full facet block 1`] = `
+{
+  "ID": {
+    "path": "body.cveMetadata.cveId",
+    "regex": "CVE-[a-zA-Z0-9._-]+",
+    "showDistinct": true,
+  },
+  "cveState": {
+    "class": "nobr ",
+    "enum": [
+      "RESERVED",
+      "PUBLISHED",
+      "REJECTED",
+    ],
+    "icons": {
+      "PUBLISHED": "globe",
+      "REJECTED": "no",
+      "RESERVED": "edit",
+    },
+    "path": "body.cveMetadata.state",
+    "tabs": false,
+  },
+  "cvss": {
+    "path": "body.containers.cna.metrics.cvssV4_0.baseScore",
+  },
+  "date": {
+    "bulk": true,
+    "path": "body.containers.cna.datePublic",
+  },
+  "defect": {
+    "href": "https://example.net/internal/bugs/",
+    "path": "body.containers.cna.source.defect",
+    "showDistinct": true,
+  },
+  "discovery": {
+    "bulk": true,
+    "chart": true,
+    "class": "nobr ",
+    "enum": [
+      "INTERNAL",
+      "EXTERNAL",
+      "USER",
+      "UNKNOWN",
+    ],
+    "icons": {
+      "EXTERNAL": "hat",
+      "INTERNAL": "hardhat",
+      "UNKNOWN": "what",
+      "USER": "cap",
+    },
+    "path": "body.containers.cna.source.discovery",
+  },
+  "owner": {
+    "bulk": true,
+    "chart": true,
+    "class": "nobr ",
+    "enum": [
+      "example",
+      "team",
+      "memebers",
+      "change",
+      "in",
+      "conf.js",
+    ],
+    "path": "body.CNA_private.owner",
+  },
+  "product": {
+    "chart": true,
+    "path": "body.containers.cna.affected.product",
+    "pipeline": [
+      {
+        "$unwind": "$body.containers.cna.affected",
+      },
+      {
+        "$sortByCount": "$body.containers.cna.affected.product",
+      },
+    ],
+  },
+  "severity": {
+    "chart": true,
+    "hideColumn": true,
+    "path": "body.containers.cna.metrics.cvssV4_0.baseSeverity",
+  },
+  "state": {
+    "bulk": true,
+    "class": "nobr ",
+    "enum": [
+      "new",
+      "open",
+      "draft",
+      "review",
+      "waiting",
+      "pending",
+      "closed",
+    ],
+    "icons": {
+      "closed": "closed",
+      "draft": "edit",
+      "new": "inbox",
+      "open": "inbox1",
+      "pending": "cal",
+      "review": "eye",
+      "waiting": "wait",
+    },
+    "path": "body.CNA_private.state",
+    "tabs": true,
+  },
+  "title": {
+    "href": "/cve5/",
+    "path": "body.containers.cna.title",
+    "xref": {
+      "href": "ID",
+    },
+  },
+  "type": {
+    "bulk": true,
+    "class": "nobr ",
+    "enum": [
+      "unsure",
+      "no-vuln",
+      "advisory",
+      "no-advisory",
+      "doc",
+      "misc",
+      "duplicate",
+    ],
+    "icons": {
+      "advisory": "alert",
+      "doc": "text",
+      "duplicate": "ext",
+      "misc": "misc",
+      "no-advisory": "no",
+      "no-vuln": "safe",
+      "unsure": "what",
+    },
+    "path": "body.CNA_private.type",
+    "tabs": true,
+  },
+  "updated": {
+    "path": "updatedAt",
+  },
+  "ym": {
+    "chart": true,
+    "hideColumn": true,
+    "path": "body.CNA_private.publish.ym",
+    "sort": -1,
+  },
+}
+`;
+
+exports[`optSet("cve5", ["default"]) — full plugin shape > snapshot of conf 1`] = `
+{
+  "class": "vgi-alert",
+  "name": "CVE 5.0",
+  "order": 0.12,
+  "shortcuts": [
+    {
+      "class": "vgi-folder",
+      "href": [Function],
+      "label": "My CVEs",
+    },
+  ],
+  "title": "CVE: Common Vulnerabilities and Exposures",
+  "uri": "/cve5/",
+}
+`;
+
+exports[`optSet("cve5", ["default"]) — full plugin shape > snapshot of icons map 1`] = `
+{
+  "ASSIGNER": "user",
+  "ASSIGNER_SHORT_NAME": "user",
+  "Advisory-ID": "tag",
+  "CNA_private": "lock",
+  "CVE_data_meta": "info",
+  "Configuration": "cog",
+  "DATE_PUBLIC": "cal",
+  "Defect": "bug",
+  "EXTERNAL": "hat",
+  "Found during": "info",
+  "ID": "tag",
+  "INTERNAL": "hardhat",
+  "Platforms": "stack",
+  "Published": "cal",
+  "References": "ext",
+  "STATE": "knob",
+  "Solution": "safe",
+  "TITLE": "title",
+  "TYPE": "bucket",
+  "Tags": "tag",
+  "Timeline": "time",
+  "UNKNOWN": "what",
+  "USER": "cap",
+  "Vendors": "factory",
+  "Versions": "versions",
+  "advisory": "alert",
+  "affected": "impact",
+  "baseScore": "dial",
+  "baseSeverity": "knob",
+  "closed": "closed",
+  "descriptions": "text",
+  "doc": "text",
+  "draft": "text",
+  "duplicate": "ext",
+  "impacts": "impact",
+  "metrics": "dial",
+  "misc": "misc",
+  "new": "inbox",
+  "no-advisory": "no",
+  "no-vuln": "safe",
+  "open": "inbox1",
+  "pending": "cal",
+  "product_name": "package",
+  "references": "ext",
+  "review": "eye",
+  "scenario": "text",
+  "source": "info",
+  "unsure": "what",
+  "vectorString": "title",
+  "waiting": "wait",
+}
+`;
+
+exports[`optSet("cve5", ["default"]) — full plugin shape > snapshot of resolved template/static/path facts 1`] = `
+{
+  "edit": "../default/cve5/edit",
+  "list": "list",
+  "render": "../default/cve5/render",
+  "schemaTitle": "CVE JSON record format",
+  "scriptLen": 45785,
+  "static": "default/cve5/static",
+  "styleLen": 4487,
+  "validators": [
+    [Function],
+  ],
+}
+`;
+
+exports[`optSet("cvss4", ["default"]) — calculator section > snapshot of conf 1`] = `
+{
+  "class": "vgi-cvss-logo",
+  "description": "Intuitive and interactive CVSS 4.0 scoring calculator. Generate accurate vulnerability severity score and ratings, vector string, and JSON exchange file for CVSS v4.0 Base, Threat, and Supplemental metrics.",
+  "favicon": "https://raw.githubusercontent.com/Vulnogram/vg-icons/refs/heads/main/src/cvss.svg",
+  "name": "CVSS 4.0",
+  "ogImage": "https://vulnogram.org/screenshots/cvssog.png",
+  "order": 0.12,
+  "title": "Common Vulnerability Scoring System",
+  "uri": "/cvss4/",
+}
+`;
+
+exports[`optSet("cvss4", ["default"]) — calculator section > snapshot of facet 1`] = `
+{
+  "ID": {
+    "path": "body.vectorString",
+    "regex": "CVSS[a-zA-Z0-9._-]+",
+    "showDistinct": true,
+  },
+}
+`;
+
+exports[`optSet("home", ["default"]) — dashboard section > snapshot of facet 1`] = `
+{
+  "ID": {
+    "chart": false,
+    "href": "/home/",
+    "hrefSuffix": "#chart",
+    "path": "body.ID",
+    "regex": "PLOT-[A-Za-z0-9-_]+",
+  },
+  "color": {
+    "path": "body.color",
+  },
+  "href": {
+    "path": "body.href",
+  },
+  "key": {
+    "path": "body.key",
+  },
+  "list": {
+    "path": "body.list",
+  },
+  "order": {
+    "hidden": true,
+    "path": "body.order",
+    "sortDefault": "order",
+  },
+  "owner": {
+    "path": "body.owner",
+    "tabs": true,
+  },
+  "title": {
+    "href": "/home/",
+    "hrefSuffix": "#chart",
+    "path": "body.title",
+    "xref": {
+      "href": "ID",
+    },
+  },
+  "type": {
+    "path": "body.type",
+  },
+  "updated": {
+    "path": "updatedAt",
+  },
+}
+`;
+
+exports[`optSet("nvd", ["default"]) — minimal read-only section > snapshot of conf 1`] = `
+{
+  "class": "vgi-data",
+  "name": "NVD",
+  "readonly": true,
+  "title": "National Vulnerability Database",
+}
+`;
+
+exports[`optSet("nvd", ["default"]) — minimal read-only section > snapshot of facet 1`] = `
+{
+  "A": {
+    "chart": true,
+    "path": "impact.baseMetricV3.cvssV3.avilabilityVector",
+  },
+  "AV": {
+    "chart": true,
+    "path": "impact.baseMetricV3.cvssV3.attackVector",
+  },
+  "C": {
+    "chart": true,
+    "path": "impact.baseMetricV3.cvssV3.confidentialityImpact",
+  },
+  "I": {
+    "chart": true,
+    "path": "impact.baseMetricV3.cvssV3.integrityImpact",
+  },
+  "ID": {
+    "class": "nobr",
+    "path": "cve.CVE_data_meta.ID",
+    "regex": "CVE-[0-9]{4}-[0-9]{4,10}",
+  },
+  "PR": {
+    "chart": true,
+    "path": "impact.baseMetricV3.cvssV3.privilegesRequired",
+  },
+  "cvss": {
+    "path": "impact.baseMetricV3.cvssV3.baseScore",
+  },
+  "date": {
+    "path": "publishedDate",
+    "sortDefault": "-date",
+  },
+  "description": {
+    "class": "sgl",
+    "path": "cve.description.description_data.value",
+  },
+  "severity": {
+    "chart": true,
+    "hideColumn": true,
+    "path": "impact.baseMetricV3.cvssV3.baseSeverity",
+  },
+  "type": {
+    "path": "cve.problemtype.problemtype_data.description.value",
+  },
+  "vendor": {
+    "path": "cve.affects.vendor.vendor_data.vendor_name",
+    "pipeline": [
+      {
+        "$unwind": "$cve.affects.vendor.vendor_data",
+      },
+      {
+        "$sortByCount": "$cve.affects.vendor.vendor_data.vendor_name",
+      },
+    ],
+  },
+}
+`;
+
+exports[`sections.js — section discovery > snapshot of the full section list 1`] = `
+[
+  "cve5",
+  "cvss4",
+  "home",
+  "nvd",
+]
+`;

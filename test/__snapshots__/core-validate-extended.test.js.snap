@@ -1,0 +1,147 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`@vulndesk/core cveSchema export > has a stable definitions block (snapshot of key names) 1`] = `
+[
+  "uriType",
+  "uuidType",
+  "reference",
+  "cveId",
+  "cpe22and23",
+  "cpe23",
+  "orgId",
+  "userId",
+  "shortName",
+  "datestamp",
+  "timestamp",
+  "version",
+  "status",
+  "product",
+  "dataType",
+  "dataVersion",
+  "cveMetadataPublished",
+  "cveMetadataRejected",
+  "providerMetadata",
+  "cpeApplicabilityElement",
+  "cpe_node",
+  "cpe_match",
+  "cnaPublishedContainer",
+  "cnaRejectedContainer",
+  "adpContainer",
+  "affected",
+  "description",
+  "englishLanguageDescription",
+  "descriptions",
+  "problemTypes",
+  "references",
+  "impacts",
+  "metrics",
+  "configurations",
+  "workarounds",
+  "solutions",
+  "exploits",
+  "timeline",
+  "credits",
+  "source",
+  "language",
+  "englishLanguage",
+  "taxonomyMappings",
+  "tagExtension",
+  "cnaTags",
+  "adpTags",
+]
+`;
+
+exports[`validateRecord: formatted error snapshots > REJECTED missing rejectedReasons formatted errors 1`] = `
+[
+  "/cveMetadata/state must be equal to one of the allowed values",
+  "/containers/cna must have required property 'descriptions'",
+  "/containers/cna must have required property 'affected'",
+  "/containers/cna must have required property 'references'",
+  "/containers/cna must have required property 'rejectedReasons'",
+  "(root) must match exactly one schema in oneOf",
+]
+`;
+
+exports[`validateRecord: formatted error snapshots > bad cveId formatted errors 1`] = `
+[
+  "/cveMetadata/cveId must match pattern "^CVE-[0-9]{4}-[0-9]{4,19}$"",
+  "/cveMetadata/cveId must match pattern "^CVE-[0-9]{4}-[0-9]{4,19}$"",
+  "/cveMetadata/state must be equal to one of the allowed values",
+  "/containers/cna must have required property 'rejectedReasons'",
+  "/containers/cna must NOT have additional properties",
+  "/containers/cna must NOT have additional properties",
+  "/containers/cna must NOT have additional properties",
+  "(root) must match exactly one schema in oneOf",
+]
+`;
+
+exports[`validateRecord: formatted error snapshots > empty {} formatted errors 1`] = `
+[
+  "(root) must have required property 'dataType'",
+  "(root) must have required property 'dataVersion'",
+  "(root) must have required property 'cveMetadata'",
+  "(root) must have required property 'containers'",
+  "(root) must have required property 'dataType'",
+  "(root) must have required property 'dataVersion'",
+  "(root) must have required property 'cveMetadata'",
+  "(root) must have required property 'containers'",
+  "(root) must match exactly one schema in oneOf",
+]
+`;
+
+exports[`validateRecord: formatted error snapshots > non-UUID assignerOrgId formatted errors 1`] = `
+[
+  "/cveMetadata/assignerOrgId must match pattern "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$"",
+  "/cveMetadata/assignerOrgId must match pattern "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$"",
+  "/cveMetadata/state must be equal to one of the allowed values",
+  "/containers/cna must have required property 'rejectedReasons'",
+  "/containers/cna must NOT have additional properties",
+  "/containers/cna must NOT have additional properties",
+  "/containers/cna must NOT have additional properties",
+  "(root) must match exactly one schema in oneOf",
+]
+`;
+
+exports[`validateRecord: formatted error snapshots > null input formatted errors 1`] = `
+[
+  "(root) must be object",
+  "(root) must be object",
+  "(root) must match exactly one schema in oneOf",
+]
+`;
+
+exports[`validateRecord: formatted error snapshots > out-of-range cvssV3_1 baseScore formatted errors 1`] = `
+[
+  "/containers/cna/metrics/0/cvssV3_1/baseScore must be <= 0",
+  "/containers/cna/metrics/0/cvssV3_1/baseSeverity must be equal to constant",
+  "/containers/cna/metrics/0/cvssV3_1/baseScore must be equal to one of the allowed values",
+  "/containers/cna/metrics/0/cvssV3_1/baseSeverity must be equal to constant",
+  "/containers/cna/metrics/0/cvssV3_1/baseScore must be equal to one of the allowed values",
+  "/containers/cna/metrics/0/cvssV3_1/baseSeverity must be equal to constant",
+  "/containers/cna/metrics/0/cvssV3_1/baseScore must be equal to one of the allowed values",
+  "/containers/cna/metrics/0/cvssV3_1/baseSeverity must be equal to constant",
+  "/containers/cna/metrics/0/cvssV3_1/baseScore must be equal to one of the allowed values",
+  "/containers/cna/metrics/0/cvssV3_1 must match a schema in anyOf",
+  "/containers/cna/metrics/0/cvssV3_1/baseScore must be equal to one of the allowed values",
+  "/cveMetadata/state must be equal to one of the allowed values",
+  "/containers/cna must have required property 'rejectedReasons'",
+  "/containers/cna must NOT have additional properties",
+  "/containers/cna must NOT have additional properties",
+  "/containers/cna must NOT have additional properties",
+  "/containers/cna must NOT have additional properties",
+  "(root) must match exactly one schema in oneOf",
+]
+`;
+
+exports[`validateRecord: formatted error snapshots > unknown top-level property formatted errors 1`] = `
+[
+  "(root) must NOT have additional properties",
+  "(root) must NOT have additional properties",
+  "/cveMetadata/state must be equal to one of the allowed values",
+  "/containers/cna must have required property 'rejectedReasons'",
+  "/containers/cna must NOT have additional properties",
+  "/containers/cna must NOT have additional properties",
+  "/containers/cna must NOT have additional properties",
+  "(root) must match exactly one schema in oneOf",
+]
+`;
