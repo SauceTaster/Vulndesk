@@ -19,7 +19,8 @@
     "build": "make min",
     "start": "./scripts/start.sh",
     "stop": "pm2 stop vulndesk",
-    "restart": "pm2 restart vulndesk"
+    "restart": "pm2 restart vulndesk",
+    "test:e2e": "playwright test"
   },
   "author": "SauceTaster",
   "license": "MIT",
@@ -74,6 +75,7 @@
   ],
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.61.0",
     "csso": "^5.0.5",
     "csso-cli": "^4.0.2",
     "eslint": "^10.5.0",

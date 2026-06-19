@@ -13,3 +13,8 @@ config/conf.js
 
 # Local Claude Code tooling
 .claude/
+
+# Playwright
+playwright-report/
+test-results/
+.cache/
