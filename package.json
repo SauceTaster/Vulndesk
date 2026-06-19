@@ -7,7 +7,10 @@
     "node": ">=20"
   },
   "scripts": {
-    "test": "nodemon app",
+    "dev": "nodemon app",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "make min",
     "start": "./scripts/start.sh",
     "stop": "forever stop app.js",
     "restart": "forever restart app.js"
@@ -67,5 +70,8 @@
     "JSON",
     "schema",
     "editor"
-  ]
+  ],
+  "devDependencies": {
+    "vitest": "^4.1.9"
+  }
 }
