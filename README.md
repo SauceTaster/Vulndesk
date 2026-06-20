@@ -2,6 +2,20 @@
 
 _Making the world safer one CVE ID at a time, since 2017._
 
+![status: building in public](https://img.shields.io/badge/status-building%20in%20public-orange)
+![stability: not production ready](https://img.shields.io/badge/stability-pre--release-red)
+![license: MIT](https://img.shields.io/badge/license-MIT-blue)
+
+> ### 🚧 Building in public — early & incomplete
+>
+> Vulndesk is being built **in the open**, and it is **not ready for a full release
+> or production use yet**. It is an active, MIT-licensed rebuild toward a modern stack
+> (TypeScript · Hono · React/TanStack · Zod · Drizzle/Postgres · BetterAuth · Tailwind).
+> **Expect breaking changes** to the APIs, schema, and UI without notice while the
+> foundations come together. Follow along — see [`docs/REWRITE.md`](docs/REWRITE.md)
+> for the plan and [`docs/MODERNIZATION.md`](docs/MODERNIZATION.md) for the audit.
+> The goal is to match the Vulnogram experience people already trust before calling it 1.0.
+
 > **ℹ️ Vulndesk** is a community-maintained, **MIT-licensed** fork of
 > [Vulnogram](https://github.com/Vulnogram/Vulnogram), branched from
 > commit [`41702c4c`](https://github.com/Vulnogram/Vulnogram/commit/41702c4c6f7ca218612662aba56c3da1978c3699)
