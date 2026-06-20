@@ -16,16 +16,25 @@ executable spec for "as good as."
 
 ## Decided stack (the "core")
 
-| Concern | Choice | Notes |
+> **The concrete, version-verified package choices, rationale, rejected
+> alternatives, risks, and build sequencing now live in
+> [ADR-0001](./adr/0001-modern-typescript-stack.md)** (backed by the current-docs
+> research in [`research/2026-06-stack-research.md`](./research/2026-06-stack-research.md)).
+> The table below is the high-level summary; the ADR is the source of record.
+
+| Concern | Choice | Key packages (see ADR-0001) |
 |---|---|---|
-| Language | **TypeScript** | strict; whole codebase |
-| Backend / API | **Hono** | tiny, fast, standards-based; runs Node/Bun/Cloudflare Workers — fits the API + MCP + automation + edge goals |
-| Frontend | **React + TanStack** (Router, Query, Table) | SPA consuming the Hono API |
-| Styling | **TailwindCSS** | replaces the hand-written CSS + `csso` pipeline |
-| Domain validation | **Zod** | app models, API request/response I/O |
-| CVE5 conformance | **AJV** | CVE5 *is* a canonical JSON Schema; keep spec-accurate validation in `@vulndesk/core` |
-| ORM / DB | **Drizzle + PostgreSQL** | JSONB for CVE records, relational for orgs/teams/users; pgvector for search later |
-| Auth | **BetterAuth** | replaces passport-local + express-session + csurf; has a Drizzle/Postgres adapter |
+| Language | **TypeScript** (strict) | `typescript`, `@tsconfig/strictest` |
+| Backend / API | **Hono + `@hono/zod-openapi`** | OpenAPI 3.1 from Zod; Scalar docs; Hono RPC client |
+| Frontend | **Vite SPA: React + TanStack Router/Query/Table** (not Start) | `@tanstack/react-*`, Tailwind v4, shadcn/ui |
+| CVE5 editor | **`@rjsf/core` v6 (hybrid) + official schema + custom widgets** | `@rjsf/*`, `ae-cvss-calculator`, `vite-plugin-singlefile` |
+| Domain validation | **Zod** (4.x) | one source of truth → validation + OpenAPI + types |
+| CVE5 conformance | **AJV** in `@vulndesk/core` | spec-accurate; the editor + API + MCP all defer to it |
+| ORM / DB | **Drizzle on `postgres.js`** | JSONB body + RLS + generated-`tsvector` FTS; PGlite tests |
+| Auth (AS) | **BetterAuth = OAuth 2.1 authorization server** | `@better-auth/oauth-provider` + `jwt()` + `organization` (teams) |
+| AuthZ | **org-plugin RBAC + Postgres RLS** | owner/admin/member/viewer over orgs → teams → members |
+| MCP auth | **MCP server = OAuth 2.1 resource server** | RFC 9728 PRM + RFC 8707 audience-bound JWT vs BetterAuth JWKS |
+| Tooling | **pnpm + Turborepo + ESLint/Prettier + Changesets** | keep tsup/vitest; add `typescript-eslint` |
 
 ## Strategy: strangler-fig, not big-bang
 
