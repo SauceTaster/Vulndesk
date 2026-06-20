@@ -1,5 +1,22 @@
-import { describe, it, expect } from 'vitest'
-import app from '../packages/api/src/app.ts'
+import { describe, it, expect, beforeAll } from 'vitest'
+import { fileURLToPath } from 'node:url'
+import { PGlite } from '@electric-sql/pglite'
+import { drizzle } from 'drizzle-orm/pglite'
+import { migrate } from 'drizzle-orm/pglite/migrator'
+import * as schema from '../packages/db/src/schema.ts'
+import { createApp } from '../packages/api/src/app.ts'
+
+const migrationsFolder = fileURLToPath(new URL('../packages/db/drizzle', import.meta.url))
+
+// The app is db-injected; the stateless routes below don't touch it, but
+// createApp requires a Db, so we build it over an in-memory PGlite.
+let app
+
+beforeAll(async () => {
+  const db = drizzle(new PGlite(), { schema })
+  await migrate(db, { migrationsFolder })
+  app = createApp(db)
+}, 30000)
 
 const validRecord = {
   dataType: 'CVE_RECORD',
@@ -58,7 +75,10 @@ describe('@vulndesk/api', () => {
     expect(doc.openapi).toMatch(/^3\.1/)
     expect(doc.paths['/validate']?.post).toBeTruthy()
     expect(doc.paths['/cve5/schema']?.get).toBeTruthy()
+    expect(doc.paths['/documents']?.post).toBeTruthy()
+    expect(doc.paths['/documents/{id}']?.get).toBeTruthy()
     expect(doc.components?.schemas?.ValidationResult).toBeTruthy()
+    expect(doc.components?.schemas?.Document).toBeTruthy()
   })
 
   it('GET /cve5/schema returns the canonical CVE5 schema', async () => {
