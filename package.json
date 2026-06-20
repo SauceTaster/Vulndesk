@@ -22,7 +22,8 @@
     "start": "./scripts/start.sh",
     "stop": "pm2 stop vulndesk",
     "restart": "pm2 restart vulndesk",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "dev:mem": "node scripts/dev-mem.cjs"
   },
   "author": "SauceTaster",
   "license": "MIT",
