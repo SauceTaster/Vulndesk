@@ -49,7 +49,7 @@
     "linkifyjs": "^4.1.1",
     "lodash": "^4.18.1",
     "mongodb": "^3.7.3",
-    "mongoose": "^6.12.2",
+    "mongoose": "^9.7.1",
     "object-path": "^0.11.7",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
