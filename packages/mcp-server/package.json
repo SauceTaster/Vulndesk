@@ -1,0 +1,32 @@
+{
+  "name": "@vulndesk/mcp-server",
+  "version": "0.1.0",
+  "description": "Model Context Protocol server for Vulndesk — exposes @vulndesk/core (CVE5 validation, schema) as MCP tools/resources for LLM-assisted advisory authoring.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "vulndesk-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepare": "tsup",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.22.0",
+    "@vulndesk/core": "*",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3"
+  }
+}
