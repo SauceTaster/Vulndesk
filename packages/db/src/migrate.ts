@@ -36,6 +36,16 @@ function asString(v: unknown): string | null {
 }
 
 /**
+ * Coerce a record body to a JSON object. CVE/advisory bodies are always objects;
+ * the `documents.body` column is typed as one, so a degenerate legacy body
+ * (array/scalar/null) collapses to {} rather than violating the response
+ * contract. legacyMongoId still keys the row, so such cases stay traceable.
+ */
+function asObject(v: unknown): Record<string, unknown> {
+  return v && typeof v === 'object' && !Array.isArray(v) ? (v as Record<string, unknown>) : {}
+}
+
+/**
  * Map one legacy Mongo document ({ _id, author, body, doc_id, slug, comments[],
  * files[] }, strict:false) to the relational + JSONB shape. Pure + testable.
  */
@@ -57,7 +67,7 @@ export function mapMongoDoc(section: string, raw: unknown, opts: MapOptions = {}
       cveId,
       state,
       author: env.author ?? null,
-      body: env.body ?? {},
+      body: asObject(env.body),
       slug: env.slug ?? null,
       fullSlug: env.full_slug ?? null,
       parentId: null, // parent linkage (history docs) is a follow-up

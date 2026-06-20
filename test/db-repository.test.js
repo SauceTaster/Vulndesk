@@ -149,10 +149,13 @@ describe('listDocuments', () => {
 describe('updateDocument', () => {
   it('patches fields, bumps version, advances updatedAt', async () => {
     const created = await createDocument(db, insertFor('cve5', recordBody('CVE-2024-0020', 'PUBLISHED')))
+    // Delay so the update's clock is strictly after the create's: a plain >=
+    // would pass even if updateDocument forgot to bump updatedAt.
+    await new Promise((r) => setTimeout(r, 5))
     const updated = await updateDocument(db, created.id, { state: 'REJECTED' })
     expect(updated.state).toBe('REJECTED')
     expect(updated.version).toBe(created.version + 1)
-    expect(updated.updatedAt.getTime()).toBeGreaterThanOrEqual(created.updatedAt.getTime())
+    expect(updated.updatedAt.getTime()).toBeGreaterThan(created.updatedAt.getTime())
   })
 
   it('returns null when patching a missing id', async () => {

@@ -66,6 +66,14 @@ describe('@vulndesk/db — Mongo→PG mapping', () => {
     expect(m.files[0].uploadedBy).toBe('bob') // legacy file.user -> uploaded_by
     expect(m.document.body.cveMetadata.cveId).toBe('CVE-2024-0001')
   })
+
+  it('coerces a non-object body to {} so the object-typed column/contract holds', () => {
+    // CVE bodies are always objects; a degenerate legacy body must not leak a
+    // non-object value into documents.body (Document.body is an object).
+    expect(mapMongoDoc('cve5', { _id: 'a', body: [1, 2, 3] }).document.body).toEqual({})
+    expect(mapMongoDoc('cve5', { _id: 'b', body: 'scalar' }).document.body).toEqual({})
+    expect(mapMongoDoc('cve5', { _id: 'c', body: null }).document.body).toEqual({})
+  })
 })
 
 describe('@vulndesk/db — insert + idempotency (PGlite)', () => {

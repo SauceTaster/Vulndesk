@@ -146,17 +146,52 @@ describe('PATCH /documents/{id}', () => {
     expect(doc.version).toBe(created.version + 1)
   })
 
-  it('re-derives cveId from a replacement body', async () => {
-    const created = await (await postJson('/documents', { section: 'cve5', body: recordBody('CVE-2024-0031') })).json()
-    const res = await patchJson(`/documents/${created.id}`, { body: recordBody('CVE-2024-9999', 'REJECTED') })
+  it('re-derives state from a same-id replacement body, keeping docId', async () => {
+    const created = await (await postJson('/documents', { section: 'cve5', body: recordBody('CVE-2024-0031', 'PUBLISHED') })).json()
+    const res = await patchJson(`/documents/${created.id}`, { body: recordBody('CVE-2024-0031', 'REJECTED') })
+    expect(res.status).toBe(200)
     const doc = await res.json()
-    expect(doc.cveId).toBe('CVE-2024-9999')
-    expect(doc.state).toBe('REJECTED')
+    expect(doc.docId).toBe('CVE-2024-0031') // immutable natural key
+    expect(doc.cveId).toBe('CVE-2024-0031')
+    expect(doc.state).toBe('REJECTED') // mirrors the new body
+  })
+
+  it('clears the promoted state when a same-id replacement body drops cveMetadata.state', async () => {
+    const created = await (await postJson('/documents', { section: 'cve5', body: recordBody('CVE-2024-0050', 'PUBLISHED') })).json()
+    expect(created.state).toBe('PUBLISHED')
+    const bodyNoState = {
+      dataType: 'CVE_RECORD',
+      dataVersion: '5.1',
+      cveMetadata: { cveId: 'CVE-2024-0050', assignerOrgId: 'b3476cb9-2e3d-41a6-98d0-0f47421a65b6' },
+      containers: { cna: { descriptions: [{ lang: 'en', value: 'A sufficiently long description.' }] } },
+    }
+    const doc = await (await patchJson(`/documents/${created.id}`, { body: bodyNoState })).json()
+    expect(doc.docId).toBe('CVE-2024-0050')
+    expect(doc.state).toBeNull() // not stale 'PUBLISHED'
+    expect(doc.cveId).toBe('CVE-2024-0050')
+  })
+
+  it('409s when a replacement body changes the immutable docId, leaving the row untouched', async () => {
+    const created = await (await postJson('/documents', { section: 'cve5', body: recordBody('CVE-2024-0051') })).json()
+    const res = await patchJson(`/documents/${created.id}`, { body: recordBody('CVE-2024-7777') })
+    expect(res.status).toBe(409)
+    expect((await res.json()).error).toMatch(/immutable|docId/i)
+    const after = await (await req(`/documents/${created.id}`)).json()
+    expect(after.docId).toBe('CVE-2024-0051')
+    expect(after.cveId).toBe('CVE-2024-0051')
   })
 
   it('404s when patching a missing id', async () => {
     const res = await patchJson('/documents/00000000-0000-0000-0000-000000000000', { state: 'x' })
     expect(res.status).toBe(404)
+  })
+})
+
+describe('body size limit', () => {
+  it('413s a request body over the 5 MB cap', async () => {
+    const huge = { section: 'cve5', docId: 'BIG-1', body: { blob: 'a'.repeat(6 * 1024 * 1024) } }
+    const res = await postJson('/documents', huge)
+    expect(res.status).toBe(413)
   })
 })
 

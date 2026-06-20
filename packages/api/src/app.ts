@@ -1,4 +1,5 @@
 import { OpenAPIHono, createRoute, z } from '@hono/zod-openapi'
+import { bodyLimit } from 'hono/body-limit'
 import { Scalar } from '@scalar/hono-api-reference'
 import { validateRecord, formatErrors, cveSchema } from '@vulndesk/core'
 import {
@@ -105,7 +106,7 @@ function toResponse(row: DocumentRow) {
     cveId: row.cveId,
     state: row.state,
     author: row.author,
-    body: row.body as Record<string, unknown>,
+    body: row.body,
     slug: row.slug,
     fullSlug: row.fullSlug,
     version: row.version,
@@ -188,6 +189,10 @@ const updateDocumentRoute = createRoute({
   responses: {
     200: { content: { 'application/json': { schema: DocumentResponse } }, description: 'Updated' },
     404: { content: { 'application/json': { schema: ErrorResponse } }, description: 'Not found' },
+    409: {
+      content: { 'application/json': { schema: ErrorResponse } },
+      description: 'Body changes the immutable docId',
+    },
   },
 })
 
@@ -233,6 +238,16 @@ export function createApp(db: Db) {
       }
     },
   })
+
+  // Cap request bodies (records go straight into JSONB) to bound memory/abuse;
+  // generous vs. real CVE records. Auth is still deferred (ADR-0002).
+  app.use(
+    '*',
+    bodyLimit({
+      maxSize: 5 * 1024 * 1024,
+      onError: (c) => c.json({ error: 'Request body too large (max 5 MB).' }, 413),
+    })
+  )
 
   // Chained so `typeof routes` carries the full type graph for the Hono RPC client.
   const routes = app
@@ -305,13 +320,29 @@ export function createApp(db: Db) {
         ...(input.slug !== undefined ? { slug: input.slug } : {}),
         ...(input.fullSlug !== undefined ? { fullSlug: input.fullSlug } : {}),
       }
-      // A replacement body re-derives the promoted index columns (an explicit
-      // `state` in the request still wins).
+
+      // A replacement body re-derives the promoted index columns so they keep
+      // mirroring the body. docId is the immutable natural key: if the new body
+      // derives a *different* docId, that changes the document's identity, so
+      // reject (409) rather than letting docId and cveId/body silently diverge.
       if (input.body !== undefined) {
+        const existing = await getDocumentById(db, id)
+        if (!existing) return c.json({ error: 'Document not found' }, 404)
         const d = deriveDocumentFields(input.body)
+        if (d.docId !== null && d.docId !== existing.docId) {
+          return c.json(
+            {
+              error: `Body changes the document id to '${d.docId}', but docId '${existing.docId}' is immutable. Create a new document instead.`,
+            },
+            409
+          )
+        }
         patch.cveId = d.cveId
-        if (input.state === undefined && d.state !== null) patch.state = d.state
+        // Mirror the body's state (clearing to null when absent); an explicit
+        // `state` in the request still wins.
+        if (input.state === undefined) patch.state = d.state
       }
+
       const row = await updateDocument(db, id, patch)
       if (!row) return c.json({ error: 'Document not found' }, 404)
       return c.json(toResponse(row), 200)

@@ -459,6 +459,16 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Body changes the immutable docId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       },

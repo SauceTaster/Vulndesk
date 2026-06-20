@@ -37,7 +37,11 @@ export const documents = pgTable(
     cveId: text('cve_id'), // promoted from body for fast equality (cve5)
     state: text('state'), // promoted (e.g. PUBLISHED/REJECTED)
     author: text('author'),
-    body: jsonb('body').notNull(), // the CVE/advisory record (validated by @vulndesk/core)
+    // the CVE/advisory record. Always a JSON object: the API enforces this on
+    // write (CveRecord = z.record) and the migrator coerces (asObject), so the
+    // response contract (Document.body is an object) holds. `.$type` is a
+    // type-only annotation — the column stays plain jsonb (no migration).
+    body: jsonb('body').$type<Record<string, unknown>>().notNull(),
     slug: text('slug'),
     fullSlug: text('full_slug'),
     parentId: uuid('parent_id'),
