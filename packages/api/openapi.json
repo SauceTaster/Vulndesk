@@ -1,0 +1,95 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Vulndesk API",
+    "version": "0.1.0",
+    "description": "CVE / security-advisory authoring API. Building in public — v1 exposes @vulndesk/core validation."
+  },
+  "components": {
+    "schemas": {
+      "ValidationResult": {
+        "type": "object",
+        "properties": {
+          "valid": {
+            "type": "boolean"
+          },
+          "errorCount": {
+            "type": "integer"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "valid",
+          "errorCount",
+          "errors"
+        ]
+      },
+      "CveRecord": {
+        "type": "object",
+        "additionalProperties": {},
+        "description": "A CVE Record Format 5.x record (JSON object)."
+      }
+    },
+    "parameters": {}
+  },
+  "paths": {
+    "/validate": {
+      "post": {
+        "tags": [
+          "CVE"
+        ],
+        "summary": "Validate a CVE Record Format 5.x record",
+        "description": "Validates the record against the official CVE5 JSON Schema via @vulndesk/core.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CveRecord"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Validation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cve5/schema": {
+      "get": {
+        "tags": [
+          "CVE"
+        ],
+        "summary": "The canonical CVE Record Format 5.x JSON Schema",
+        "responses": {
+          "200": {
+            "description": "CVE5 JSON Schema",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "webhooks": {}
+}

@@ -57,7 +57,7 @@ module.exports = [
     },
   },
   {
-    files: ['test/**/*.js', 'vitest.config.js', 'eslint.config.js'],
+    files: ['test/**/*.js', 'vitest.config.js', 'eslint.config.js', 'packages/**/*.mjs'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
