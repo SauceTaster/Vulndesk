@@ -20,6 +20,7 @@ Consequences.
 | ADR | Title | Status |
 |---|---|---|
 | [0001](./0001-modern-typescript-stack.md) | Modern TypeScript + React stack & target architecture | Accepted |
+| [0002](./0002-auth-and-mcp-authorization.md) | Authentication, authorization & MCP token validation | Accepted |
 
 ### Decisions locked by ADR-0001 (quick reference)
 
