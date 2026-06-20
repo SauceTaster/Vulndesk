@@ -1,18 +1,39 @@
 {
   "name": "@vulndesk/core",
   "version": "0.1.0",
-  "description": "Headless, framework-agnostic CVE/advisory core for Vulndesk: CVE5 record validation (AJV) and transforms shared by the web UI, the standalone bundle, and the MCP server.",
+  "description": "Headless, framework-agnostic CVE/advisory core for Vulndesk: CVE5 record validation (AJV) and Zod domain models shared by the web UI, the standalone bundle, and the MCP server.",
   "license": "MIT",
-  "main": "src/index.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "files": [
-    "src",
-    "schema"
+    "dist",
+    "schema",
+    "src"
   ],
   "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepare": "tsup",
     "test": "vitest run"
   },
   "dependencies": {
     "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1"
+    "ajv-formats": "^3.0.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3"
   }
 }

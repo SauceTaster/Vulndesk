@@ -18,3 +18,7 @@ config/conf.js
 playwright-report/
 test-results/
 .cache/
+
+# Built TS packages
+packages/*/dist
+*.tsbuildinfo

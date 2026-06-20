@@ -10,6 +10,10 @@ module.exports = [
     ignores: [
       'node_modules/**',
       'packages/*/node_modules/**',
+      'packages/*/dist/**',
+      // TypeScript sources are type-checked via `tsc`; typescript-eslint setup
+      // is a follow-up. The JS flat config can't parse .ts.
+      'packages/**/*.ts',
       'standalone/**',
       'public/**',
       'default/**',
