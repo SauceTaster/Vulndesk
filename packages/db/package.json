@@ -1,0 +1,34 @@
+{
+  "name": "@vulndesk/db",
+  "version": "0.1.0",
+  "description": "Vulndesk data layer — Drizzle ORM on PostgreSQL (single-tenant for self-host), with the Mongo→Postgres migrator. JSONB document bodies validated by @vulndesk/core.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./schema": { "types": "./dist/schema.d.ts", "import": "./dist/schema.js" }
+  },
+  "files": ["dist", "drizzle"],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "prepare": "tsup",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
+  },
+  "dependencies": {
+    "@vulndesk/core": "*",
+    "drizzle-orm": "^0.45.2",
+    "postgres": "^3.4.9",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.3",
+    "@types/node": "^26.0.0",
+    "drizzle-kit": "^0.31.10",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3"
+  }
+}

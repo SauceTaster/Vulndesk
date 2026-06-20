@@ -1,9 +1,15 @@
 # ADR-0002: Authentication, authorization & MCP token validation
 
-- **Status:** Accepted
+- **Status:** Deferred — revisit when multi-tenant SaaS is needed (see [ADR-0003](./0003-self-host-first-and-editor.md))
 - **Date:** 2026-06-20
 - **Deciders:** SauceTaster (maintainer)
 - **Refines:** the auth section of [ADR-0001](./0001-modern-typescript-stack.md)
+
+> **Deferred (2026-06-20).** Per ADR-0003 the near-term target is **self-hosted,
+> single-org**, which needs only simple login + a role or two — not an OAuth 2.1
+> authorization server, orgs/teams, or RLS. This design is **correct and kept on
+> file for the SaaS phase**, but is not being built now. Today the data layer is
+> single-tenant (`@vulndesk/db`) and auth stays as-is.
 - **Evidence:** read against the current BetterAuth docs (organization, MCP, OAuth
   Provider, JWT, Hono integration) and the MCP authorization spec — see References.
 

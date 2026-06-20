@@ -19,8 +19,9 @@ Consequences.
 
 | ADR | Title | Status |
 |---|---|---|
-| [0001](./0001-modern-typescript-stack.md) | Modern TypeScript + React stack & target architecture | Accepted |
-| [0002](./0002-auth-and-mcp-authorization.md) | Authentication, authorization & MCP token validation | Accepted |
+| [0001](./0001-modern-typescript-stack.md) | Modern TypeScript + React stack & target architecture | Accepted (editor §2.3 amended by 0003) |
+| [0002](./0002-auth-and-mcp-authorization.md) | Authentication, authorization & MCP token validation | **Deferred** (SaaS phase) |
+| [0003](./0003-self-host-first-and-editor.md) | Self-host-first sequencing; keep @json-editor/json-editor | Accepted |
 
 ### Decisions locked by ADR-0001 (quick reference)
 
