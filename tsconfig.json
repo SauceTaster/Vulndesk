@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0",
+    "target": "ES2022",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["ES2022"],
+    "esModuleInterop": true,
+    "allowJs": true,
+    "checkJs": false,
+    "strict": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "types": ["node"]
+  },
+  "include": [
+    "app.ts",
+    "init-vulndesk.ts",
+    "routes/**/*.ts",
+    "models/**/*.ts",
+    "config/**/*.ts",
+    "lib/**/*.ts",
+    "types/**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "packages", "public", "default", "standalone", "scripts", "test", "e2e", "tmp"]
+}

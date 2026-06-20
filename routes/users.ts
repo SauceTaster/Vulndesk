@@ -2,26 +2,26 @@
 
 // user management.
 
-const express = require('express');
-const protected = express.Router();
-const public = express.Router();
-const crypto = require('crypto');
-const passport = require('passport');
-const pbkdf2 = require('../lib/pbkdf2.js');
-const User = require('../models/user');
-const conf = require('../config/conf');
-const csurf = require('csurf');
+import express = require('express')
+const protectedRouter = express.Router();
+const publicRouter = express.Router();
+import crypto = require('crypto')
+import passport = require('passport')
+import pbkdf2 = require('../lib/pbkdf2.js')
+import User = require('../models/user')
+import conf = require('../config/conf')
+import csurf = require('csurf')
 const {
     matchedData,
     check,
     validationResult
 } = require('express-validator');
 
-const validator = require('validator');
+import validator = require('validator')
 var csrfProtection = csurf();
 
 // If admin allow edits, otherwise display user
-protected.get('/profile/:id(' + conf.usernameRegex + ')?', csrfProtection, function (req, res) {
+protectedRouter.get('/profile/:id(' + conf.usernameRegex + ')?', csrfProtection, function (req, res) {
     var admin = false;
     if (req.user.priv == 0) {
         admin = true;
@@ -76,7 +76,7 @@ protected.get('/profile/:id(' + conf.usernameRegex + ')?', csrfProtection, funct
 });
 
 // Register or update an user
-protected.post('/profile/:id(' + conf.usernameRegex + ')?', csrfProtection, [
+protectedRouter.post('/profile/:id(' + conf.usernameRegex + ')?', csrfProtection, [
     check('name')
         .trim()
         .isLength({
@@ -232,13 +232,13 @@ protected.post('/profile/:id(' + conf.usernameRegex + ')?', csrfProtection, [
     }
 });
 
-protected.get('/delete/:id(' + conf.usernameRegex + ')', csrfProtection, function (req, res) {
+protectedRouter.get('/delete/:id(' + conf.usernameRegex + ')', csrfProtection, function (req, res) {
     req.flash('warning', 'Deleteing users is not yet implemented. Fow now users can be deleted in the backend database.');
     res.render('blank');
 });
 
 // Login form
-public.get('/login', csrfProtection, function (req, res) {
+publicRouter.get('/login', csrfProtection, function (req, res) {
     res.render('users/login', {
         title: 'Vulndesk',
         csrfToken: req.csrfToken()
@@ -246,7 +246,7 @@ public.get('/login', csrfProtection, function (req, res) {
 });
 
 // Login process
-public.post('/login', csrfProtection, function (req, res, next) {
+publicRouter.post('/login', csrfProtection, function (req, res, next) {
     passport.authenticate('local', {
         successRedirect: req.session.returnTo || '/home',
         failureRedirect: '/users/login',
@@ -255,7 +255,7 @@ public.post('/login', csrfProtection, function (req, res, next) {
 });
 
 // Logout form
-public.get('/logout', function (req, res, next) {
+publicRouter.get('/logout', function (req, res, next) {
     req.logout(function(err){
         if(err) {
             return next(err);
@@ -268,7 +268,7 @@ public.get('/logout', function (req, res, next) {
 
 
 //List users
-protected.get('/list', function (req, res) {
+protectedRouter.get('/list', function (req, res) {
     if (req.isAuthenticated()) {
         User.find({}, [], {
             sort: {
@@ -289,7 +289,7 @@ protected.get('/list', function (req, res) {
     }
 });
 
-protected.get('/list/json', function (req, res) {
+protectedRouter.get('/list/json', function (req, res) {
     if (req.isAuthenticated()) {
         User.find({group:req.user.group}, ['username','name','emoji'], {
             sort: {
@@ -310,7 +310,7 @@ protected.get('/list/json', function (req, res) {
 
     }
 });
-protected.get('/list/css', function (req, res) {
+protectedRouter.get('/list/css', function (req, res) {
     if (req.isAuthenticated()) {
         User.find({group:req.user.group}, ['username','name','emoji'], {
             sort: {
@@ -331,7 +331,7 @@ protected.get('/list/css', function (req, res) {
 
     }
 });
-module.exports = {
-    public: public,
-    protected: protected
+export = {
+    public: publicRouter,
+    protected: protectedRouter
 };

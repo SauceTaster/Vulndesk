@@ -17,6 +17,11 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
+// Load the app's TypeScript graph the way it runs in production — under tsx's
+// Node require hook — rather than through vite. This keeps the dynamically
+// required .js plugin configs in CommonJS/sloppy mode and resolves the .ts
+// source modules, matching real runtime semantics exactly.
+require('tsx/cjs/api').register()
 const request = require('supertest')
 
 let mem
@@ -82,11 +87,13 @@ beforeAll(async () => {
   const conf = require('../config/conf')
   conf.database = uri
 
-  // Require the app AFTER env + conf are set so it connects to our test DB.
-  app = require('../app.js')
+  // Require the app (via the tsx hook registered above) AFTER env + conf are
+  // set so it connects to our test DB. tsx and the test share Node's require
+  // cache, so this conf mutation is the same instance the app reads.
+  app = require('../app.ts')
   mongoose = require('mongoose')
-  User = require('../models/user')
-  pbkdf2 = require('../lib/pbkdf2.js')
+  User = require('../models/user.ts')
+  pbkdf2 = require('../lib/pbkdf2.ts')
 
   // The global ensureConnected middleware returns 500 until mongoose is ready,
   // so wait for the connection to be fully open before issuing any request.

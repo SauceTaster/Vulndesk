@@ -1,7 +1,7 @@
-const pbkdf2 = require('./lib/pbkdf2.js');
-const User = require('./models/user.js');
-const mongoose = require('mongoose');
-const config = require('./config/conf');
+import pbkdf2 = require('./lib/pbkdf2.js')
+import User = require('./models/user.js')
+import mongoose = require('mongoose')
+import config = require('./config/conf')
 
 mongoose.Promise = global.Promise;
 mongoose.set('strictQuery', false);

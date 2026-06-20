@@ -1,8 +1,8 @@
-const express = require('express');
-const csurf = require('csurf');
+import express = require('express')
+import csurf = require('csurf')
 var csrfProtection = csurf();
-const crypto = require('crypto');
-const sanitizeHtml = require('sanitize-html');
+import crypto = require('crypto')
+import sanitizeHtml = require('sanitize-html')
 
 // Comment bodies are rich text rendered as HTML to every viewer. Sanitize on the
 // server before persisting so the (bypassable, client-only) editor sanitizer is
@@ -47,7 +47,7 @@ var matchingEmail = async function (doc_id) {
 
 
 // input doc, opts
-module.exports = function (Document, opts) {
+export = function (Document, opts) {
 
     var unifiedComments = async function (doc_id, comments) {
         var emails = null;
@@ -64,7 +64,7 @@ module.exports = function (Document, opts) {
         return u;
     }
 
-    var addComment = async function (doc_id, username, text, parent_slug) {
+    var addComment = async function (doc_id, username, text, parent_slug?) {
         try {
 
             //var posted = new Date();

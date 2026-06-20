@@ -1,16 +1,16 @@
 // Copyright (c) 2018 Chandan B N. All rights reserved.
 
-var fs = require('fs');
-var extend = require('extend');
+import fs = require('fs')
+import extend = require('extend')
 
 // go through default and custom configurations and return them.
-module.exports = function (setName, paths) {
-    var result  = {
+export = function (setName, paths) {
+    var result: any = {
         list: 'list',
         edit: 'edit',
         render: 'render'
     };
-    var conf = {};
+    var conf: any = {};
     if (!paths) 
         paths = ['default','custom'];
     for (let p in paths) {

@@ -78,7 +78,7 @@ Copy the "default" directory as "custom" and modify relevant pug templates, sche
 ### Step 5. Configure a user on the CLI for logging in
 
 ```console
-$ node useradd.js tester tester@example.com Tester sirt@example.com 1
+$ npx tsx scripts/useradd.js tester tester@example.com Tester sirt@example.com 1
 Enter Password: ********************************************
 Enter Password again: ********************************************
 Success New user is now registered and can log in: tester
@@ -88,10 +88,14 @@ Success New user is now registered and can log in: tester
 
 Copy the `example.env` file to `.env` and configure the environment variables to values you prefer. The values in `.env` will automatically be loaded as environment variables when Vulndesk starts. See [dotenv](https://github.com/motdotla/dotenv) for more details.
 
-### Step 7. Start the node application
+### Step 7. Start the application
+
+The server is TypeScript, run through [tsx](https://github.com/privatenumber/tsx) (no build step):
 
 ```plaintext
-$ node app.js
+$ npm start          # production (pm2 + tsx)
+$ npm run dev        # local, with file-watch reload
+$ npm run dev:mem    # zero-setup eval: throwaway in-memory Mongo + seeded admin
 ```
 
 (set `NODE_ENV=development` for local testing without HTTPS)
@@ -105,24 +109,21 @@ Use a process monitor like [pm2](https://www.npmjs.com/package/pm2) (preferred) 
 First install pm2 using instruction [at pm2 documentation](https://www.npmjs.com/package/pm2)
 
 ```console
-$ pm2 start app.js
+$ pm2 start app.ts --interpreter ./node_modules/.bin/tsx --name vulndesk
 [PM2] Spawning PM2 daemon with pm2_home=/home/vulndesk/.pm2
 [PM2] PM2 Successfully daemonized
-[PM2] Starting /home/vulndesk/app.js in fork_mode (1 instance)
+[PM2] Starting /home/vulndesk/app.ts in fork_mode (1 instance)
 [PM2] Done.
 ```
 
 #### 8.b Example using [forever](https://www.npmjs.com/package/forever)
 
 ```console
-$ forever start app.js
-> vulndesk@0.6.0 start /home/vulndesk/
-> forever start --id 'vulndesk' --spinSleepTime 5000 --minUptime 2000 app.js
+$ forever start -c "npx tsx" app.ts
+> forever start --id 'vulndesk' --spinSleepTime 5000 --minUptime 2000 -c "npx tsx" app.ts
 
-info:    Forever processing file: app.js
+info:    Forever processing file: app.ts
 info:    Forever processes running
-data:        uid  command                      script forever pid   id        logfile                      uptime
-data:    [0] v3wE /usr/bin/node app.js 11208   11210 vulndesk /home/vulndesk/.forever/v3wE.log 0:0:0:0.23
 ```
 
 ### Step 9. Finish

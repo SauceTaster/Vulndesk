@@ -1,8 +1,8 @@
 // Copyright (c) 2017 Chandan B N. All rights reserved.
 
-const mongoose = require('mongoose');
+import mongoose = require('mongoose')
 
-const UserSchema = mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -43,4 +43,4 @@ const UserSchema = mongoose.Schema({
 //1 read/write
 //2 read
 
-const User = module.exports = mongoose.model('User', UserSchema);
+export = mongoose.model('User', UserSchema);

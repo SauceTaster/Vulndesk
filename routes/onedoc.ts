@@ -1,20 +1,20 @@
-const express = require('express');
-const csurf = require('csurf');
+import express = require('express')
+import csurf = require('csurf')
 var csrfProtection = csurf();
-const textUtil = require('../public/js/util.js');
-var jsonpatch = require('json-patch-extended');
-var _ = require('lodash');
-const docModel = require('../models/doc');
-const querymw = require('../lib/querymw');
+import textUtil = require('../public/js/util.js')
+import jsonpatch = require('json-patch-extended')
+import _ = require('lodash')
+import docModel = require('../models/doc')
+import querymw = require('../lib/querymw')
 
 const {
     check,
     validationResult
 } = require('express-validator');
 
-const validator = require('validator');
+import validator = require('validator')
 
-module.exports = function (Document, opts) {
+export = function (Document, opts) {
     var checkID = check(opts.jsonidpath)
         .exists()
         .custom((val, {
@@ -103,12 +103,12 @@ module.exports = function (Document, opts) {
         if (req.querymen.query[opts.idpath]) {
             var fq = {};
             fq[opts.idpath] = req.querymen.query[opts.idpath];
-            var doc = await Document.findOne(fq);
+            doc = await Document.findOne(fq);
         }
         if (doc) {
             res.redirect(req.querymen.query[opts.idpath]);
         } else {
-            var doc = {};
+            doc = {};
             for (let a in req.querymen.query) {
                 _.set(doc, a, req.querymen.query[a]);
             };

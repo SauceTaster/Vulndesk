@@ -4,6 +4,7 @@ JS = $(OUT)/js
 
 CSSO = ./node_modules/.bin/csso
 UJS = ./node_modules/.bin/terser
+TSX = ./node_modules/.bin/tsx
 
 TARGETS := $(OUT) $(OUT)/static $(OUT)/index.html $(CSS)/min.css $(CSS)/simplehtml.css $(CSS)/vg-icons.css $(CSS)/tagify.css $(CSS)/logo.png $(CSS)/logo.svg $(JS)/util.js $(JS)/editor.js $(JS)/mode-json.js $(JS)/cvss.json $(JS)/cwe-all.json $(JS)/cwe-frequent.json $(JS)/capec.json $(JS)/simplehtml.js $(JS)/tablesort.min.js $(JS)/tagify.min.js $(OUT)/static/CVE.svg $(OUT)/static/cve5sw.js $(OUT)/static/cvss40.js
 
@@ -14,7 +15,7 @@ $(OUT)/static:
 	mkdir -p $(OUT)/static
 
 $(OUT)/index.html: ./scripts/standalone.js ./config/conf-standalone.js ./[cd][ue][sf]*[mt]/cve5/* ./views/*
-	if [ -e "./custom/cve5/conf.js" ]; then node $< custom ;  else node $< ; fi
+	if [ -e "./custom/cve5/conf.js" ]; then $(TSX) $< custom ;  else $(TSX) $< ; fi
 
 $(OUT)/js:
 	mkdir -p $(OUT)/js

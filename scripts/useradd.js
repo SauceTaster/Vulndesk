@@ -38,7 +38,7 @@ function hidden(query, callback) {
 const args = process.argv;
 
 if (args.length != 7) {
-    console.error('Usage node useradd.js username email "Name" CNA_email priv(0=admin, 1=read-write, 2=read only)');
+    console.error('Usage: npx tsx scripts/useradd.js username email "Name" CNA_email priv(0=admin, 1=read-write, 2=read only)');
     process.exit(1);
 }
 const rl = readline.createInterface({

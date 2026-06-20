@@ -1,14 +1,14 @@
-const express = require('express');
-const csurf = require('csurf');
+import express = require('express')
+import csurf = require('csurf')
 var csrfProtection = csurf();
-const path = require('path');
-const os = require('os');
-const Busboy = require('busboy');
-const fs = require('fs');
-var sanitizeFile = require("sanitize-filename");
+import path = require('path')
+import os = require('os')
+import Busboy = require('busboy')
+import fs = require('fs')
+import sanitizeFile = require("sanitize-filename")
 // input doc, opts
 
-module.exports = function (Document, opts) {
+export = function (Document, opts) {
     var router = express.Router();
     // SAVE a file.
 

@@ -1,4 +1,4 @@
-var querymen = require('querymen');
+import querymen = require('querymen')
 function phraseSplit(searchString) {
         var s1 = searchString.match(/\\?.|^$/g).reduce((p, c) => {
         if(c === '"'){
@@ -40,7 +40,7 @@ function phraseSplit(searchString) {
         qSchema.param('severity').option('nullify', true);
     }*/
 
-module.exports = function(facet) {
+export = function(facet) {
     var queryDef = {
         q: {
             normalize: false,

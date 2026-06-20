@@ -3,10 +3,10 @@
 // Generate the standalone static Vulndesk client side only page
 
 // usage:
-// $ node scripts/standalone.js
+// $ npx tsx scripts/standalone.js
 
 // to load a customized overide schema in 'custom/cve/conf.js': 
-// $ node scripts/standalone.js custom
+// $ npx tsx scripts/standalone.js custom
 
 const fs = require('fs');
 const pug = require('pug');

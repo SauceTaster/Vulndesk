@@ -1,20 +1,20 @@
-const express = require('express');
-const fs = require('fs');
-const docModel = require('../models/doc');
-const conf = require('../config/conf');
-const querymw = require('../lib/querymw');
-const package = require('../package.json');
-const csurf = require('csurf');
+import express = require('express')
+import fs = require('fs')
+import docModel = require('../models/doc')
+import conf = require('../config/conf')
+import querymw = require('../lib/querymw')
+const pkg = require('../package.json')
+import csurf = require('csurf')
 var csrfProtection = csurf();
-var querymen = require('querymen');
-var qs = require('querystring');
-const _ = require('lodash');
-const path = require('path');
-const mongoose = require('mongoose');
+import querymen = require('querymen')
+import qs = require('querystring')
+import _ = require('lodash')
+import path = require('path')
+import mongoose = require('mongoose')
 
 var queryMW;
 
-module.exports = function (name, opts) {
+export = function (name, opts) {
     opts.schemaName = name;
     //todo make it configurable
     var idpath = opts.idpath = opts.facet.ID.path;
@@ -31,7 +31,7 @@ module.exports = function (name, opts) {
     var toIndex = {};
     var defaultSort = {};
     var lookups = [];
-    var chartFacet = {
+    var chartFacet: any = {
         count: [{
             $count: "total"
         }]
@@ -111,12 +111,12 @@ module.exports = function (name, opts) {
 
     queryMW = querymw(opts.facet);
 
-    var module = {};
+    var module: any = {};
     var Document = module.Document = docModel(name);
 
     //console.log(toIndex);
     for (var x in toIndex) {
-        var o = {};
+        var o: any = {};
         o[x] = toIndex[x];
         delete o.createIndex;
         Document.collection.createIndex(o, { background: true }).catch(function(e){
@@ -269,7 +269,7 @@ module.exports = function (name, opts) {
                 if (Object.keys(prj).length > 0) {
 
                     var g = {},
-                        gg = {},
+                        gg = {} as any,
                         sor = {};
 
                     if (typeof f !== 'string' && f.length == 1) {
@@ -493,7 +493,7 @@ module.exports = function (name, opts) {
             res.setHeader('Cache-Control', 'no-store, must-revalidate, max-age=0');
             res.locals.renderStartTime = Date.now();
             res.render(opts.list, {
-                title: (opts.conf ? opts.conf.title + ' - ' : '') + package.name,
+                title: (opts.conf ? opts.conf.title + ' - ' : '') + pkg.name,
                 docs: docs,
                 opts: opts,
            //     textUtil: textUtil,
@@ -543,9 +543,9 @@ module.exports = function (name, opts) {
                     }
                     if (Object.keys(q).length != 0) {
 
-                        var d = new Date();
+                        var now = new Date();
                         q.author = req.user.username;
-                        q.updatedAt = d;
+                        q.updatedAt = now;
                         //console.log(q);
                         var fq = {};
                         fq[idpath] = f;

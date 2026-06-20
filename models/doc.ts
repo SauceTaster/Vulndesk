@@ -1,9 +1,9 @@
 // Copyright (c) 2017 Chandan B N. All rights reserved.
 
-const mongoose = require('mongoose');
+import mongoose = require('mongoose')
 
-module.exports = function (name) {
-    const docSchema = mongoose.Schema({
+export = function (name) {
+    const docSchema = new mongoose.Schema({
         author: String,
         body: Object,
         doc_id: String,

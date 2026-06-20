@@ -1,32 +1,32 @@
 // Copyright (c) 2017 Chandan B N. All rights reserved.
 
-const express = require('express');
+import express = require('express')
 // Patch Express 4 so rejections from async route handlers are forwarded to the
 // centralized error handler below instead of becoming unhandled rejections.
 // (Express 5 does this natively — remove when we migrate.)
 require('express-async-errors');
-const path = require('path');
-const fs = require('fs');
-const mongoose = require('mongoose');
-const flash = require('connect-flash');
-const https = require('https');
-const pug = require('pug');
+import path = require('path')
+import fs = require('fs')
+import mongoose = require('mongoose')
+import flash = require('connect-flash')
+import https = require('https')
+import pug = require('pug')
 // TODO: don't use express-session for large-scale production use
-const session = require('express-session');
+import session = require('express-session')
 
-const passport = require('passport');
-const crypto = require('crypto');
-const compress = require('compression');
-const helmet = require('helmet');
+import passport = require('passport')
+import crypto = require('crypto')
+import compress = require('compression')
+import helmet from 'helmet'
 
 const dotenv = require('dotenv').config()
 if (dotenv.error) {
     console.log(".env was not loaded.");
 }
 
-const conf = require('./config/conf');
-const optSet = require('./models/set');
-const core = require('@vulndesk/core');
+import conf = require('./config/conf')
+import optSet = require('./models/set')
+import core = require('@vulndesk/core')
 
 if(!process.env.NODE_ENV) {
     process.env.NODE_ENV = "production";
@@ -54,7 +54,7 @@ db.on('error', function (err) {
 
 const app = express();
 
-var rateLimit = require('express-rate-limit');
+import rateLimit from 'express-rate-limit'
 var limiter = rateLimit({
   windowMs: 1*60*1000, // 1 minute
   max: 200
@@ -106,7 +106,7 @@ app.use(session({
     cookie: {
       httpOnly: true,
       sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production' && !!conf.httpsOptions
+      secure: process.env.NODE_ENV === 'production' && !!(conf as any).httpsOptions
     }
 }));
 
@@ -166,15 +166,15 @@ app.use(function (req, res, next) {
 })
 
 // set up routes
-let users = require('./routes/users');
+import users = require('./routes/users')
 app.use('/users', users.public);
 app.use('/users', ensureAuthenticated, users.protected);
 
-let docs = require('./routes/doc');
+import docs = require('./routes/doc')
 
 app.locals.confOpts = {};
 
-var sections = require('./models/sections.js')();
+var sections = require('./models/sections.js')()
 
 for (let section of sections) {
     var s = optSet(section, ['default', 'custom']);
@@ -189,15 +189,15 @@ for (let section of sections) {
 app.use('/home/stats', ensureAuthenticated, async function(req, res, next){
     var sections = [];
     for (let section of conf.sections){
-        var s = {};
+        let s: any = {};
         try {
-            var s = await db.collection(section+'s').stats();
+            s = await db.collection(section+'s').stats();
         } catch (e){
 
         };
         if (!s || Object.keys(s).length === 0) {
         try {
-            var s = await db.collection(section).stats();
+            s = await db.collection(section).stats();
         } catch (e){
 
         };
@@ -227,8 +227,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-if(conf.customRoutes) {
-    for (let r of conf.customRoutes) {
+if((conf as any).customRoutes) {
+    for (let r of (conf as any).customRoutes) {
         app.use(r.path, require(r.route));
     }
 }
@@ -273,12 +273,12 @@ app.use(function (err, req, res, next) {
 // Only start a listener when run directly (`node app.js`). When required (e.g.
 // by supertest in the test suite) the app is exported without binding a port.
 if (require.main === module) {
-    if(conf.httpsOptions) {
-        https.createServer(conf.httpsOptions, app).listen(conf.serverPort, conf.serverHost, function () {
+    if((conf as any).httpsOptions) {
+        https.createServer((conf as any).httpsOptions, app).listen(Number(conf.serverPort), conf.serverHost, function () {
             console.log('Server started at https://' + conf.serverHost + ':' + conf.serverPort);
         });
     } else {
-        app.listen(conf.serverPort, conf.serverHost, function () {
+        app.listen(Number(conf.serverPort), conf.serverHost, function () {
             console.log('Server started at http://' + conf.serverHost + ':' + conf.serverPort);
         });
     }

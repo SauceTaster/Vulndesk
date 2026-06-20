@@ -7,7 +7,9 @@ After=network.target
 Environment=NODE_ENV=production
 Type=simple
 User=webapp
-ExecStart=/data/server/node/bin/node /data/server/repos/Vulndesk/app.js
+WorkingDirectory=/data/server/repos/Vulndesk
+# The app is TypeScript; run it through tsx (installed as a dependency).
+ExecStart=/data/server/repos/Vulndesk/node_modules/.bin/tsx app.ts
 Restart=on-failure
 
 [Install]

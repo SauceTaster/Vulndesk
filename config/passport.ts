@@ -1,11 +1,11 @@
 // Copyright (c) 2017 Chandan B N. All rights reserved.
 
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/user');
-const config = require('./conf');
-const pbkdf2 = require('../lib/pbkdf2.js');
+import User = require('../models/user')
+import config = require('./conf')
+import pbkdf2 = require('../lib/pbkdf2.js')
 
-module.exports = function (passport) {
+export = function (passport) {
     // Local strategy
     passport.use(new LocalStrategy(function (username, password, done) {
         User.findOne({username: username}, function (err, user) {
